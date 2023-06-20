@@ -27,12 +27,12 @@ class ViewController: UIViewController, UITableViewDelegate {
         }
         // Will return custom traits or super of trait collection depending on result of if check
         return traits
-        /*
-         Console warning and bug still exist in trait override causing occassional improper layout of ipad portrait on launch.
-         This bug corrects itself when rotating device and does not reappear unless app is restarted.
-         Still looking for a better way to implement. May need to set constraints programmatically?
-         */
     }
+    /*
+     Console warning and bug still exist in trait override causing occassional improper layout of ipad portrait on launch.
+     This bug corrects itself when rotating device and does not reappear unless app is restarted.
+     Still looking for a better way to implement. May need to set constraints programmatically?
+     */
     
     // Override to prevent animation on orientaion change
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -41,16 +41,13 @@ class ViewController: UIViewController, UITableViewDelegate {
                                 {_ in
             UIView.setAnimationsEnabled(false)
         })
-        /*
-         iPad still animates on first transition, additional transitions are not animated.
-         */
     }
+    /* iPad still animates on first transition, additional transitions are not animated.*/
     
     // MARK: Core data
     
     // Create context for core data object
     var managedObjectContext: NSManagedObjectContext = AppDelegate().persistentContainer.viewContext
-    
     
     // Table view data provider and source
     var topScoresDataProvider: TopScoresDataProvider!

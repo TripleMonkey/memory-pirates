@@ -24,8 +24,6 @@ extension ViewController {
     func startGame() {
         // Instance of new game
         currentGame = Playthrough(cardValues: assignValues())
-        // Add new playthrough to user defaults via player profile
-        //PlayerProfile.shared.addPlaythrough(newGame: currentGame)
         // Clear any previous matched pairs
         clearMatches()
         // Drill down in stack view to get row count row count
@@ -38,7 +36,7 @@ extension ViewController {
             guard let column = cardStackView.arrangedSubviews[i/rowCount] as? UIStackView,
                   let cardButton = column.arrangedSubviews[i%rowCount] as? UIButton
             else { return }
-            // assign radomized pairs list image with matching int position
+            // Assign radomized pairs list image with matching int position
             cardButton.setImage(UIImage(named: "cardFace\(currentGame.cardValues[i])"), for: .selected)
             // Set matching tags for views (add 1 to avoid default 0 tag value)
             cardButton.tag = i+1
@@ -65,8 +63,7 @@ extension ViewController {
             else { return }
         if matchCount == 15 {
             
-            // Finalize game values and add to core data
-            //let context = AppDelegate.shared.persistentContainer.viewContext
+            // Finalize game values and add new score to core data
             let newPlaythrough = NSEntityDescription.insertNewObject(forEntityName: "Score", into: self.managedObjectContext) as! Score
             newPlaythrough.totalMoves = Int16(moves)
             newPlaythrough.timeStarted = currentGame.startTime
@@ -145,15 +142,7 @@ extension ViewController {
         }
     }
     
-    // function to return best time as string
-   // func showBestTime() -> String {
-        
-//        let bestTime = topScoresDataSource.doubleToTimeString(timeAsDouble: managedObjectContext)
-//        return bestTime
-  //  }
-    
-    
-    // MARK: objc functions
+    // MARK: @objc functions
     
     // Check for match
     @objc func matchCheck() {
@@ -212,7 +201,7 @@ extension ViewController {
         playButton.isUserInteractionEnabled.toggle()
         resetButton.isEnabled.toggle()
         if !playButton.isHidden {
-            animateScale(view: playButton, minScale: 0.99, timesRepeating: .infinity)
+            animateScale(view: playButton, minScale: 0.89, timesRepeating: .infinity)
             cardStackView.alpha = 0.5
         }
         else {

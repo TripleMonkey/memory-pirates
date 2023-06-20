@@ -42,6 +42,7 @@
 		9E6E72C42A41F3ED00BB009B /* Playthrough.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Playthrough.swift; sourceTree = "<group>"; };
 		9E6E72C52A41F3EE00BB009B /* TopScoresDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopScoresDataProvider.swift; sourceTree = "<group>"; };
 		9E6E72C62A41F3EE00BB009B /* TopScoresDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopScoresDataSource.swift; sourceTree = "<group>"; };
+		9ED3D78D2A42004A00BD31F9 /* MemoryPirates.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MemoryPirates.entitlements; sourceTree = "<group>"; };
 		9EDDCBF72A3CF4C5006E7B01 /* MemoryPirates.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MemoryPirates.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9EDDCBFA2A3CF4C5006E7B01 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9EDDCBFC2A3CF4C5006E7B01 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -124,6 +125,7 @@
 		9EDDCBF92A3CF4C5006E7B01 /* MemoryPirates */ = {
 			isa = PBXGroup;
 			children = (
+				9ED3D78D2A42004A00BD31F9 /* MemoryPirates.entitlements */,
 				9EDDCC0B2A3CF4C8006E7B01 /* Info.plist */,
 				9EDDCBFA2A3CF4C5006E7B01 /* AppDelegate.swift */,
 				9EDDCBFC2A3CF4C5006E7B01 /* SceneDelegate.swift */,
@@ -346,6 +348,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MemoryPirates/MemoryPirates.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5P8JPPPQ9D;
@@ -374,6 +377,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MemoryPirates/MemoryPirates.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5P8JPPPQ9D;
