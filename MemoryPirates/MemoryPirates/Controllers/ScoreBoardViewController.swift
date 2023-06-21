@@ -16,13 +16,13 @@ class ScoreBoardViewController: UIViewController, UITableViewDelegate, UITextFie
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var recordsTableView: UITableView!
     // String for player name
-    var playerName: String = "New Player"
+    var playerName: String = UserDefaults.standard.string(forKey: "name") ?? ""//"New Player"
     
     
     // MARK: Core data
     
     // Context for core data object
-    var managedObjectContext: NSManagedObjectContext = AppDelegate().persistentContainer.viewContext
+    var managedObjectContext: NSManagedObjectContext = AppDelegate.sharedContext
     // Data provider
     var topScoresDataProvider: TopScoresDataProvider!
     // Data Source
@@ -33,7 +33,7 @@ class ScoreBoardViewController: UIViewController, UITableViewDelegate, UITextFie
     override func viewDidLoad() {
         super.viewDidLoad()
         // Set player name
-        playerName = UserDefaults.standard.string(forKey: "name") ?? "New Player"
+        playerName = UserDefaults.standard.string(forKey: "name") ?? ""
         nameTextField.text = playerName
         // Assign self as delegates
         nameTextField.delegate = self

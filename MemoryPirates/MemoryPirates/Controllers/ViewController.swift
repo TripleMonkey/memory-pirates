@@ -47,7 +47,7 @@ class ViewController: UIViewController, UITableViewDelegate {
     // MARK: Core data
     
     // Create context for core data object
-    var managedObjectContext: NSManagedObjectContext = AppDelegate().persistentContainer.viewContext
+    var managedObjectContext: NSManagedObjectContext = AppDelegate.sharedContext
     
     // Table view data provider and source
     var topScoresDataProvider: TopScoresDataProvider!
@@ -77,8 +77,7 @@ class ViewController: UIViewController, UITableViewDelegate {
     // Int to track move count
     var moves = 0
     // String for player name
-    var playerName = UserDefaults.standard.string(forKey: "name")
-    
+    var playerName: String = UserDefaults.standard.string(forKey: "name") ?? ""
     // MARK: ViewDidLoad
     
     override func viewDidLoad() {

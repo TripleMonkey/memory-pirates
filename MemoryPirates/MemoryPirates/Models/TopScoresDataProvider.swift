@@ -19,7 +19,7 @@ class TopScoresDataProvider: NSObject, NSFetchedResultsControllerDelegate {
     var delegate: TopScoresDataProviderDelegate!
     // Vars for managed object
     var fetchResultsController: NSFetchedResultsController<Score>!
-    var managedObjectContext: NSManagedObjectContext = AppDelegate().persistentContainer.viewContext
+    var managedObjectContext: NSManagedObjectContext = AppDelegate.sharedContext
     var sections: [NSFetchedResultsSectionInfo]? {
         get {
             return self.fetchResultsController.sections

@@ -67,7 +67,7 @@ extension ViewController {
             let newPlaythrough = NSEntityDescription.insertNewObject(forEntityName: "Score", into: self.managedObjectContext) as! Score
             newPlaythrough.totalMoves = Int16(moves)
             newPlaythrough.timeStarted = currentGame.startTime
-            newPlaythrough.playerName = UserDefaults.standard.string(forKey: "playerName")
+            newPlaythrough.playerName = UserDefaults.standard.string(forKey: "name")
             newPlaythrough.elapsedTime = currentGame.startTime!.timeIntervalSinceNow
 
             // Stop timer
