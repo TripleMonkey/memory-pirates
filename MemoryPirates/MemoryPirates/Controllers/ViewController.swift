@@ -82,6 +82,10 @@ class ViewController: UIViewController, UITableViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Authenticate Game Center user
+        GameCenterManager.sharedManager.authenticatePlayer()
+        
         if recordsTableView != nil {
             // Assign self as tableview delegate
             recordsTableView.delegate = self
