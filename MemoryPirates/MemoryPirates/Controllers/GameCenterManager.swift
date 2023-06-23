@@ -9,11 +9,14 @@ import UIKit
 import GameKit
 
 
-class GameCenterManager: NSObject {
+class GameCenterManager: NSObject, GKGameCenterControllerDelegate {
     
     let presentationController: UIViewController = ViewController()
-    static let sharedManager = GameCenterManager()
-    private override init() {}
+    
+    override init() {
+        super.init()
+        gameCenterAceesPoint.isActive = true
+    }
     
     func authenticatePlayer() {
         let localPlayer = GKLocalPlayer.local
@@ -29,15 +32,30 @@ class GameCenterManager: NSObject {
         }
     }
     
-    func showLeaderboard() {
-        
+    // Configure shared access point for game center
+    var gameCenterAceesPoint: GKAccessPoint {
+        GKAccessPoint.shared.location = .topLeading
+        return GKAccessPoint.shared
     }
     
+    func showLeaderboard() {
+        // Display scores for a specific leaderboard.
+        let viewController = GKGameCenterViewController(
+                        leaderboardID: "triplemonkeystudio.memorypiratesfastesttimes",
+                        playerScope: .global,
+                        timeScope: .allTime)
+        viewController.gameCenterDelegate = self
+        self.presentationController.present(viewController, animated: true, completion: nil)
+    }
+    
+    // Add score to leaderboard
     func reportScore(score: Int) {
         
     }
     
+    // Dismiss view controller when finished
     @objc func gameCenterViewControllerDidFinish(_ gameCenterViewController: GKGameCenterViewController) {
         gameCenterViewController.dismiss(animated: true)
     }
 }
+

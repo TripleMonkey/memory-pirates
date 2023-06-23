@@ -10,10 +10,10 @@
 //
 //  Created by Nigel Krajewski on 11/30/20.
 //
+
 import Foundation
 import UIKit
 import CoreData
-
 class ViewController: UIViewController, UITableViewDelegate {
     
     // MARK: Trait collection override
@@ -78,13 +78,15 @@ class ViewController: UIViewController, UITableViewDelegate {
     var moves = 0
     // String for player name
     var playerName: String = UserDefaults.standard.string(forKey: "name") ?? ""
+    
+    
     // MARK: ViewDidLoad
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Authenticate Game Center user
-        GameCenterManager.sharedManager.authenticatePlayer()
+        GameCenterManager().authenticatePlayer()
         
         if recordsTableView != nil {
             // Assign self as tableview delegate
@@ -92,14 +94,16 @@ class ViewController: UIViewController, UITableViewDelegate {
             // Load Core Data to table view
             loadTopScores()
         }
-        // Hide play button until game play check
-        playButton.isHidden = true
-        playButton.isUserInteractionEnabled = false
-        // Play opening sound
-        playAudio(sound: "launchSound", type: ".mp3")
-        // Begin game playthrough
-        if currentGame == nil {
-            toggleGameState()
+        if playButton != nil {
+            // Hide play button until game play check
+            playButton.isHidden = true
+            playButton.isUserInteractionEnabled = false
+            // Play opening sound
+            playAudio(sound: "launchSound", type: ".mp3")
+            // Begin game playthrough
+            if currentGame == nil {
+                toggleGameState()
+            }
         }
     }
     
@@ -157,12 +161,14 @@ class ViewController: UIViewController, UITableViewDelegate {
         }
     }
     
-    // MARK: Navigation
-    
-    // Function to conform to PlayerNameProtocol
-    func updatePlayerName(playerName: String) {
-        self.playerName = playerName
+    // Show Game Center leaderboard
+    @IBAction func handleGCLeaderboardTap(_ sender: UIBarButtonItem) {
+        print("Tapping the cloud")
+        GameCenterManager().showLeaderboard()
     }
+    
+    
+    // MARK: Navigation
     
     // Prepare segue by passing in games list and assigning protocol delegate
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
