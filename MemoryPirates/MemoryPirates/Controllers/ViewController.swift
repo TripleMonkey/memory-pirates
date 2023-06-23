@@ -87,6 +87,7 @@ class ViewController: UIViewController, UITableViewDelegate {
         
         // Authenticate Game Center user
         GameCenterManager().authenticatePlayer()
+        GameCenterManager().accessPoint.isActive = true
         
         if recordsTableView != nil {
             // Assign self as tableview delegate
@@ -177,6 +178,8 @@ class ViewController: UIViewController, UITableViewDelegate {
             // Pass games to options view
             destination.managedObjectContext = managedObjectContext
             destination.topScoresDataProvider = topScoresDataProvider
+            // Hide Game center access point
+            GameCenterManager().accessPoint.isActive = false
         }
     }
 }

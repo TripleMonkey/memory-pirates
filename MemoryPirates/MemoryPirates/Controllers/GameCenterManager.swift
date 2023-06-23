@@ -13,10 +13,10 @@ class GameCenterManager: NSObject, GKGameCenterControllerDelegate {
     
     let presentationController: UIViewController = ViewController()
     
-    override init() {
-        super.init()
-        gameCenterAceesPoint.isActive = true
-    }
+//    override init() {
+//        super.init()
+//        gameCenterAceesPoint.isActive = true
+//    }
     
     func authenticatePlayer() {
         let localPlayer = GKLocalPlayer.local
@@ -33,8 +33,9 @@ class GameCenterManager: NSObject, GKGameCenterControllerDelegate {
     }
     
     // Configure shared access point for game center
-    var gameCenterAceesPoint: GKAccessPoint {
+    var accessPoint: GKAccessPoint {
         GKAccessPoint.shared.location = .topLeading
+        GKAccessPoint.shared.isActive = true
         return GKAccessPoint.shared
     }
     
