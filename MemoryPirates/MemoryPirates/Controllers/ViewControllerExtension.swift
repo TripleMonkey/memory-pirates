@@ -70,6 +70,10 @@ extension ViewController {
             newPlaythrough.playerName = UserDefaults.standard.string(forKey: "name")
             newPlaythrough.elapsedTime = currentGame.startTime!.timeIntervalSinceNow
 
+            // Add score to game center leaderboard
+            // Pass elapsed time multipled by -100 to format for positive value in miliseconds
+            GameCenterManager().reportScore(chests: moves, timeInMilliseconds: Int(newPlaythrough.elapsedTime*(-100)))
+            
             // Stop timer
             elapsedTimer?.invalidate()
             // End game animation and audio
@@ -95,7 +99,6 @@ extension ViewController {
         matchedCountLabel.text = "\(matchCount.description) / 15"
         moveCountLabel.text = moves.description
         currentTimeLabel.text = "00:00:00"
-        
         
         // Reload table view
         self.recordsTableView.reloadData()
@@ -151,7 +154,7 @@ extension ViewController {
               let cardTwo = view.viewWithTag(matchAttempt[1]) as? UIButton
         else { return }
         // Increase move count
-        moves += 1
+        moves += 2
         moveCountLabel.text = moves.description
         // Compare card values
         if cardOne.image(for: .selected) == cardTwo.image(for: .selected) {

@@ -13,11 +13,7 @@ class GameCenterManager: NSObject, GKGameCenterControllerDelegate {
     
     let presentationController: UIViewController = ViewController()
     
-//    override init() {
-//        super.init()
-//        gameCenterAceesPoint.isActive = true
-//    }
-    
+    // Show game center login or welcome view
     func authenticatePlayer() {
         let localPlayer = GKLocalPlayer.local
         
@@ -42,16 +38,31 @@ class GameCenterManager: NSObject, GKGameCenterControllerDelegate {
     func showLeaderboard() {
         // Display scores for a specific leaderboard.
         let viewController = GKGameCenterViewController(
-                        leaderboardID: "triplemonkeystudio.memorypiratesfastesttimes",
-                        playerScope: .global,
-                        timeScope: .allTime)
+            leaderboardID: "triplemonkeystudio.memorypiratesfastesttimes",
+            playerScope: .global,
+            timeScope: .allTime)
         viewController.gameCenterDelegate = self
         self.presentationController.present(viewController, animated: true, completion: nil)
     }
     
     // Add score to leaderboard
-    func reportScore(score: Int) {
-        
+    func reportScore(chests: Int, timeInMilliseconds: Int) {
+        // Add score to fewestChest leaderboard
+        GKLeaderboard.submitScore(chests, context: 0, player: GKLocalPlayer.local, leaderboardIDs: ["com.triplemonkeystudio.MemeryPirates.FewestMoves"]) { error in
+            guard let err = error else {
+                print("New score saved")
+                return
+            }
+            print("Error reporting score: \(err).")
+        }
+        // Add time to bestTime leaderboard
+        GKLeaderboard.submitScore(timeInMilliseconds, context: 0, player: GKLocalPlayer.local, leaderboardIDs: ["com.triplemonkeystudio.MemoryPirates.FastestPlunder"]) { error in
+            guard let err = error else {
+                print("New time saved")
+                return
+            }
+            print("Error reporting score: \(err).")
+        }
     }
     
     // Dismiss view controller when finished
