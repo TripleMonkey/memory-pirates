@@ -21,6 +21,7 @@
 		9E6E72C82A41F3EE00BB009B /* Playthrough.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6E72C42A41F3ED00BB009B /* Playthrough.swift */; };
 		9E6E72C92A41F3EE00BB009B /* TopScoresDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6E72C52A41F3EE00BB009B /* TopScoresDataProvider.swift */; };
 		9E6E72CA2A41F3EE00BB009B /* TopScoresDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6E72C62A41F3EE00BB009B /* TopScoresDataSource.swift */; };
+		9ED3D78F2A42AF3800BD31F9 /* GameCenterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED3D78E2A42AF3800BD31F9 /* GameCenterManager.swift */; };
 		9EDDCBFB2A3CF4C5006E7B01 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EDDCBFA2A3CF4C5006E7B01 /* AppDelegate.swift */; };
 		9EDDCBFD2A3CF4C5006E7B01 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EDDCBFC2A3CF4C5006E7B01 /* SceneDelegate.swift */; };
 		9EDDCC052A3CF4C5006E7B01 /* MemoryPirates.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9EDDCC032A3CF4C5006E7B01 /* MemoryPirates.xcdatamodeld */; };
@@ -43,6 +44,7 @@
 		9E6E72C52A41F3EE00BB009B /* TopScoresDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopScoresDataProvider.swift; sourceTree = "<group>"; };
 		9E6E72C62A41F3EE00BB009B /* TopScoresDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopScoresDataSource.swift; sourceTree = "<group>"; };
 		9ED3D78D2A42004A00BD31F9 /* MemoryPirates.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MemoryPirates.entitlements; sourceTree = "<group>"; };
+		9ED3D78E2A42AF3800BD31F9 /* GameCenterManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCenterManager.swift; sourceTree = "<group>"; };
 		9EDDCBF72A3CF4C5006E7B01 /* MemoryPirates.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MemoryPirates.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9EDDCBFA2A3CF4C5006E7B01 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9EDDCBFC2A3CF4C5006E7B01 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 		9E6E72AE2A41F11F00BB009B /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				9ED3D78E2A42AF3800BD31F9 /* GameCenterManager.swift */,
 				9E6E72BF2A41F30B00BB009B /* ScoreBoardViewController.swift */,
 				9E6E72BE2A41F30B00BB009B /* ViewController.swift */,
 				9E6E72BD2A41F30B00BB009B /* ViewControllerExtension.swift */,
@@ -213,6 +216,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9ED3D78F2A42AF3800BD31F9 /* GameCenterManager.swift in Sources */,
 				9E6E72C12A41F30B00BB009B /* ViewController.swift in Sources */,
 				9E6E72C02A41F30B00BB009B /* ViewControllerExtension.swift in Sources */,
 				9EDDCBFB2A3CF4C5006E7B01 /* AppDelegate.swift in Sources */,
@@ -354,8 +358,10 @@
 				DEVELOPMENT_TEAM = 5P8JPPPQ9D;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MemoryPirates/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Memory Pirates";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.games";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -383,8 +389,10 @@
 				DEVELOPMENT_TEAM = 5P8JPPPQ9D;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MemoryPirates/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Memory Pirates";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.games";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";

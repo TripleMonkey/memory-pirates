@@ -42,6 +42,11 @@ class ScoreBoardViewController: UIViewController, UITableViewDelegate, UITextFie
         loadTopScores()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        // Reactivate access point when returning to game view
+        GameCenterManager().accessPoint.isActive = true
+    }
+    
     // Function to fill topScore table from saved data
     func loadTopScores() {
         // Initialize data provider
