@@ -50,10 +50,6 @@ class ViewController: UIViewController, UITableViewDelegate {
     // Create context for core data object
     var managedObjectContext: NSManagedObjectContext = AppDelegate.sharedContext
     
-    // Table view data provider and source
-    var topScoresDataProvider: TopScoresDataProvider!
-    var topScoresDataSource: TopScoresDataSource!
-    
     // MARK: Outlets, Variables
     
     // Outlets
@@ -94,7 +90,7 @@ class ViewController: UIViewController, UITableViewDelegate {
             // Assign self as tableview delegate
             recordsTableView.delegate = self
             // Load Core Data to table view
-            loadTopScores()
+            //loadTopScores()
         }
         if playButton != nil {
             // Hide play button until game play check
@@ -110,15 +106,15 @@ class ViewController: UIViewController, UITableViewDelegate {
     }
     
     // Function to fill topScore table from saved data
-    public func loadTopScores() {
-        // Initialize data provider
-        self.topScoresDataProvider = TopScoresDataProvider(managedObjectContext: self.managedObjectContext)
-        // Initialize data source
-        self.topScoresDataSource = TopScoresDataSource(cellIdentifier: "reuseScoreCell", tableView: self.recordsTableView, topScoresDataProvider: self.topScoresDataProvider)
-        // Assign source to table
-        self.recordsTableView.dataSource = self.topScoresDataSource
-        self.recordsTableView.reloadData()
-    }
+//    public func loadTopScores() {
+//        // Initialize data provider
+//        self.topScoresDataProvider = TopScoresDataProvider(managedObjectContext: self.managedObjectContext)
+//        // Initialize data source
+//        self.topScoresDataSource = TopScoresDataSource(cellIdentifier: "reuseScoreCell", tableView: self.recordsTableView, topScoresDataProvider: self.topScoresDataProvider)
+//        // Assign source to table
+//        self.recordsTableView.dataSource = self.topScoresDataSource
+//        self.recordsTableView.reloadData()
+//    }
     
     // MARK: Tap actions
     
@@ -165,15 +161,15 @@ class ViewController: UIViewController, UITableViewDelegate {
     
     // MARK: Navigation
     // Prepare segue by passing in games list and assigning protocol delegate
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "toOptions" {
-            let destination: ScoreBoardViewController = segue.destination as! ScoreBoardViewController
-            // Pass games to options view
-            destination.managedObjectContext = managedObjectContext
-            destination.topScoresDataProvider = topScoresDataProvider
-            // Hide Game center access point
-            GameCenterManager().accessPoint.isActive = false
-        }
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "toOptions" {
+//            let destination: ScoreBoardViewController = segue.destination as! ScoreBoardViewController
+//            // Pass games to options view
+//            destination.managedObjectContext = managedObjectContext
+//            destination.topScoresDataProvider = topScoresDataProvider
+//            // Hide Game center access point
+//            GameCenterManager().accessPoint.isActive = false
+//        }
+//    }
 }
 

@@ -1369,9 +1369,6 @@
                         <rightBarButtonItems>
                             <barButtonItem image="gearshape.fill" catalog="system" id="oqc-3J-3VC">
                                 <color key="tintColor" red="0.30588235289999999" green="0.015686274510000001" blue="0.18823529410000001" alpha="1" colorSpace="calibratedRGB"/>
-                                <connections>
-                                    <segue destination="84d-Bz-zej" kind="show" identifier="toOptions" id="SOG-45-IIZ"/>
-                                </connections>
                             </barButtonItem>
                             <barButtonItem title="Reset" id="rAa-my-2gV">
                                 <color key="tintColor" red="0.30588235289999999" green="0.015686274510000001" blue="0.18823529410000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -1397,102 +1394,6 @@
             </objects>
             <point key="canvasLocation" x="799" y="91"/>
         </scene>
-        <!--Pirate's Cove-->
-        <scene sceneID="PM7-LH-zeA">
-            <objects>
-                <viewController id="84d-Bz-zej" customClass="ScoreBoardViewController" customModule="MemoryPirates" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="vbG-uE-ucQ">
-                        <rect key="frame" x="0.0" y="0.0" width="430" height="932"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="A7u-Da-bHu">
-                                <rect key="frame" x="60" y="153" width="310" height="705"/>
-                                <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="11z-dn-qgA">
-                                        <rect key="frame" x="0.0" y="0.0" width="310" height="34"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pirate name:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.125" translatesAutoresizingMaskIntoConstraints="NO" id="5aA-Co-6kP">
-                                                <rect key="frame" x="0.0" y="0.0" width="100" height="34"/>
-                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                                <color key="textColor" red="0.30588235289999999" green="0.015686274510000001" blue="0.18823529410000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                                <size key="shadowOffset" width="-1" height="2"/>
-                                            </label>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xKx-Uq-D1V">
-                                                <rect key="frame" x="120" y="0.0" width="190" height="34"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                            </textField>
-                                        </subviews>
-                                        <variation key="heightClass=compact" axis="vertical"/>
-                                    </stackView>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bzL-mE-WiT">
-                                        <rect key="frame" x="0.0" y="84" width="310" height="621"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                        <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="reuseScoreCell01" textLabel="OT6-SY-rwj" detailTextLabel="d9U-Lp-pfu" imageView="xmC-Ay-FGW" style="IBUITableViewCellStyleSubtitle" id="tXI-ee-tPF">
-                                                <rect key="frame" x="0.0" y="50" width="310" height="55.666667938232422"/>
-                                                <autoresizingMask key="autoresizingMask"/>
-                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="tXI-ee-tPF" id="crY-kP-hMY">
-                                                    <rect key="frame" x="0.0" y="0.0" width="310" height="55.666667938232422"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <subviews>
-                                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="OT6-SY-rwj">
-                                                            <rect key="frame" x="87" y="8.9999999999999982" width="33" height="20.333333333333332"/>
-                                                            <autoresizingMask key="autoresizingMask"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="d9U-Lp-pfu">
-                                                            <rect key="frame" x="87" y="31.333333333333332" width="43.666666666666664" height="14.333333333333334"/>
-                                                            <autoresizingMask key="autoresizingMask"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" image="cardFace1" id="xmC-Ay-FGW">
-                                                            <rect key="frame" x="16" y="0.0" width="56" height="55.666666666666664"/>
-                                                            <autoresizingMask key="autoresizingMask"/>
-                                                        </imageView>
-                                                    </subviews>
-                                                    <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </tableViewCellContentView>
-                                                <color key="backgroundColor" systemColor="systemTealColor"/>
-                                            </tableViewCell>
-                                        </prototypes>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="10"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <outlet property="dataSource" destination="84d-Bz-zej" id="knH-xH-HGx"/>
-                                            <outlet property="delegate" destination="84d-Bz-zej" id="gyg-oa-GLn"/>
-                                        </connections>
-                                    </tableView>
-                                </subviews>
-                            </stackView>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="QhI-8V-5Im"/>
-                        <color key="backgroundColor" systemColor="systemOrangeColor"/>
-                        <constraints>
-                            <constraint firstItem="A7u-Da-bHu" firstAttribute="leading" secondItem="QhI-8V-5Im" secondAttribute="leading" constant="60" id="SCO-HP-98W"/>
-                            <constraint firstItem="QhI-8V-5Im" firstAttribute="trailing" secondItem="A7u-Da-bHu" secondAttribute="trailing" constant="60" id="VOS-yv-cUE"/>
-                            <constraint firstItem="A7u-Da-bHu" firstAttribute="top" secondItem="QhI-8V-5Im" secondAttribute="top" constant="50" id="uVU-yC-6Q4"/>
-                            <constraint firstItem="QhI-8V-5Im" firstAttribute="bottom" secondItem="A7u-Da-bHu" secondAttribute="bottom" constant="40" id="wRc-Tv-1nZ"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" title="Pirate's Cove" id="KL8-hp-d95"/>
-                    <connections>
-                        <outlet property="nameTextField" destination="xKx-Uq-D1V" id="1M5-fN-ECs"/>
-                        <outlet property="recordsTableView" destination="bzL-mE-WiT" id="sfp-YM-1ph"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="QZ5-ST-DTi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1581" y="91"/>
-        </scene>
         <!--Navigation Controller-->
         <scene sceneID="pKj-p9-Axg">
             <objects>
@@ -1517,17 +1418,11 @@
         <image name="foggyWater" width="1728" height="1296"/>
         <image name="gearshape.fill" catalog="system" width="128" height="123"/>
         <image name="startingImage" width="170.66667175292969" height="170.66667175292969"/>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
         <systemColor name="systemBlueColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemOrangeColor">
             <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemTealColor">
-            <color red="0.18823529411764706" green="0.69019607843137254" blue="0.7803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
