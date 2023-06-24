@@ -14,6 +14,7 @@
 import Foundation
 import UIKit
 import CoreData
+
 class ViewController: UIViewController, UITableViewDelegate {
     
     // MARK: Trait collection override
@@ -162,15 +163,7 @@ class ViewController: UIViewController, UITableViewDelegate {
         }
     }
     
-    // Show Game Center leaderboard
-    @IBAction func handleGCLeaderboardTap(_ sender: UIBarButtonItem) {
-        print("Tapping the cloud")
-        GameCenterManager().showLeaderboard()
-    }
-    
-    
     // MARK: Navigation
-    
     // Prepare segue by passing in games list and assigning protocol delegate
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toOptions" {

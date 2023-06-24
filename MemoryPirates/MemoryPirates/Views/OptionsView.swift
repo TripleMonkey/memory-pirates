@@ -14,6 +14,7 @@ struct OptionsView: View {
             Spacer()
             AudioOptionsView()
             .padding()
+            LeaderboardTableView()
             Spacer()
         }
         .background(Color("darkBackground"))
