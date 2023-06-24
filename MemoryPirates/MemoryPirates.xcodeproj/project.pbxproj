@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9E1C357A2A468423002C4661 /* OptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1C35792A468423002C4661 /* OptionsView.swift */; };
+		9E1C357C2A469978002C4661 /* AudioOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1C357B2A469978002C4661 /* AudioOptionsView.swift */; };
 		9E6E72B42A41F1D600BB009B /* launchSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9E6E72AF2A41F1D600BB009B /* launchSound.mp3 */; };
 		9E6E72B52A41F1D600BB009B /* noMatchSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9E6E72B02A41F1D600BB009B /* noMatchSound.mp3 */; };
 		9E6E72B62A41F1D600BB009B /* matchSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9E6E72B12A41F1D600BB009B /* matchSound.mp3 */; };
@@ -29,6 +31,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9E1C35792A468423002C4661 /* OptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsView.swift; sourceTree = "<group>"; };
+		9E1C357B2A469978002C4661 /* AudioOptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioOptionsView.swift; sourceTree = "<group>"; };
 		9E6E72AF2A41F1D600BB009B /* launchSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = launchSound.mp3; sourceTree = "<group>"; };
 		9E6E72B02A41F1D600BB009B /* noMatchSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = noMatchSound.mp3; sourceTree = "<group>"; };
 		9E6E72B12A41F1D600BB009B /* matchSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = matchSound.mp3; sourceTree = "<group>"; };
@@ -69,6 +73,8 @@
 			children = (
 				9E6E72B92A41F21C00BB009B /* LaunchScreen.storyboard */,
 				9E6E72BA2A41F21D00BB009B /* Main.storyboard */,
+				9E1C35792A468423002C4661 /* OptionsView.swift */,
+				9E1C357B2A469978002C4661 /* AudioOptionsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -219,10 +225,12 @@
 				9ED3D78F2A42AF3800BD31F9 /* GameCenterManager.swift in Sources */,
 				9E6E72C12A41F30B00BB009B /* ViewController.swift in Sources */,
 				9E6E72C02A41F30B00BB009B /* ViewControllerExtension.swift in Sources */,
+				9E1C357A2A468423002C4661 /* OptionsView.swift in Sources */,
 				9EDDCBFB2A3CF4C5006E7B01 /* AppDelegate.swift in Sources */,
 				9E6E72C82A41F3EE00BB009B /* Playthrough.swift in Sources */,
 				9EDDCBFD2A3CF4C5006E7B01 /* SceneDelegate.swift in Sources */,
 				9E6E72C22A41F30B00BB009B /* ScoreBoardViewController.swift in Sources */,
+				9E1C357C2A469978002C4661 /* AudioOptionsView.swift in Sources */,
 				9E6E72C92A41F3EE00BB009B /* TopScoresDataProvider.swift in Sources */,
 				9E6E72CA2A41F3EE00BB009B /* TopScoresDataSource.swift in Sources */,
 				9EDDCC052A3CF4C5006E7B01 /* MemoryPirates.xcdatamodeld in Sources */,
