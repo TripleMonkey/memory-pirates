@@ -100,8 +100,8 @@ extension ViewController {
         moveCountLabel.text = moves.description
         currentTimeLabel.text = "00:00:00"
         
-        // Reload table view
-        self.recordsTableView.reloadData()
+        // TODO: Reload table view
+        
     }
     
     // Function to assign card values for game playthrough

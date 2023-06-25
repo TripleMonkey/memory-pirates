@@ -56,7 +56,6 @@ class ViewController: UIViewController, UITableViewDelegate {
     @IBOutlet weak var navItem: UINavigationItem!
     @IBOutlet weak var currentTimeLabel: UILabel!
     @IBOutlet weak var bestTimeLabel: UILabel!
-    @IBOutlet weak var recordsTableView: UITableView!
     @IBOutlet weak var matchedCountLabel: UILabel!
     @IBOutlet weak var moveCountLabel: UILabel!
     @IBOutlet weak var cardStackView: UIStackView!
@@ -86,12 +85,6 @@ class ViewController: UIViewController, UITableViewDelegate {
         GameCenterManager().authenticatePlayer()
         GameCenterManager().accessPoint.isActive = true
         
-        if recordsTableView != nil {
-            // Assign self as tableview delegate
-            recordsTableView.delegate = self
-            // Load Core Data to table view
-            //loadTopScores()
-        }
         if playButton != nil {
             // Hide play button until game play check
             playButton.isHidden = true
@@ -104,17 +97,6 @@ class ViewController: UIViewController, UITableViewDelegate {
             }
         }
     }
-    
-    // Function to fill topScore table from saved data
-//    public func loadTopScores() {
-//        // Initialize data provider
-//        self.topScoresDataProvider = TopScoresDataProvider(managedObjectContext: self.managedObjectContext)
-//        // Initialize data source
-//        self.topScoresDataSource = TopScoresDataSource(cellIdentifier: "reuseScoreCell", tableView: self.recordsTableView, topScoresDataProvider: self.topScoresDataProvider)
-//        // Assign source to table
-//        self.recordsTableView.dataSource = self.topScoresDataSource
-//        self.recordsTableView.reloadData()
-//    }
     
     // MARK: Tap actions
     
