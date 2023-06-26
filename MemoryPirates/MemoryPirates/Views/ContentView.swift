@@ -10,14 +10,18 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         NavigationView {
-            VStack{
-                Spacer()
-                GameHeaderView()
-                GameAreaView()
-                GameFooterView()
+            ZStack {
+                Rectangle()
+                    .fill(Color("lightBackground"))
+                    .ignoresSafeArea()
+                VStack{
+                    GameHeaderView()
+                    GameAreaView()
+                    GameFooterView()
+                }
             }
-            .background(Color("lightBackground"))
         }
+        .background(Color("lightBackground"))
     }
 }
 
