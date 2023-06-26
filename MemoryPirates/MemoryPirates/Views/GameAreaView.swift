@@ -11,6 +11,10 @@ struct GameAreaView: View {
     
     @StateObject var gameVM = GameViewModel()
     
+    var openingCards: Playthrough {
+        Playthrough(cards: GameViewModel().assignValues(cardCount: 30))
+    }
+    
     let columns: [GridItem] = [
         GridItem(.adaptive(minimum: 70, maximum: 100), spacing: 1.0, alignment: .center)
     ]
@@ -18,7 +22,7 @@ struct GameAreaView: View {
     var body: some View {
         Group {
             LazyVGrid(columns: columns) {
-                ForEach(gameVM.currentGame.cardValues, id: \.description) { card in
+                ForEach(gameVM.currentGame?.cards ?? openingCards.cards) { card in
                     Image("startingImage")
                         .resizable()
                         .scaledToFill()
