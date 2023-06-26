@@ -11,7 +11,7 @@ import GameKit
 
 class GameCenterManager: NSObject, GKGameCenterControllerDelegate {
     
-    let presentationController: UIViewController = ViewController()
+    let presentationController = UIViewController()
     
     // Show game center login or welcome view
     func authenticatePlayer() {

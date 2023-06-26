@@ -9,7 +9,25 @@ import SwiftUI
 
 struct GameFooterView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ZStack {
+            Rectangle()
+                .foregroundColor(Color("darkBackground"))
+                .background(Color("lightBackground"))
+            Grid {
+                HStack {
+                    Spacer()
+                    Text("Matched")
+                    Text("0/15")
+                    Spacer()
+                    Text("Chests Opened")
+                    Text("0")
+                    Spacer()
+                }
+            }
+            .foregroundColor(Color("lightText"))
+            .shadow(color: .black, radius: 0, x: -2, y: 2)
+        }
+        .frame(height: UIScreen.main.bounds.height*0.1)
     }
 }
 
