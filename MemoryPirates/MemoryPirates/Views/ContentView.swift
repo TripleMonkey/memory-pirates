@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State var showingOptions = false
+    
     var body: some View {
         NavigationView {
             ZStack {
@@ -20,6 +23,7 @@ struct ContentView: View {
                     GameFooterView()
                 }
             }
+            
         }
         .background(Color("lightBackground"))
     }

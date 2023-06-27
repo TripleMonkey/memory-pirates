@@ -23,9 +23,7 @@ struct GameAreaView: View {
         Group {
             LazyVGrid(columns: columns) {
                 ForEach(gameVM.currentGame?.cards ?? openingCards.cards) { card in
-                    Image("startingImage")
-                        .resizable()
-                        .scaledToFill()
+                    CardView(cardValue: card.value)
                 }
             }
             .frame(height: UIScreen.main.bounds.height*0.5)
@@ -40,21 +38,4 @@ struct GameAreaView_Previews: PreviewProvider {
     static var previews: some View {
         GameAreaView()
     }
-}
-
-
-struct gameCard: View {
-    
-    @State var showingValue = false
-    
-    var cardValue: String
-    
-    var body: some View {
-        if showingValue {
-            Image(cardValue)
-        } else {
-            Image("startingImage")
-        }
-    }
-    
 }

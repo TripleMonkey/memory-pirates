@@ -31,6 +31,56 @@ final class GameViewModel: ObservableObject {
         currentGame = Playthrough(cards: assignValues(cardCount: 30))
     }
     
+    //Function to assign random values to game cards
+    func assignValues(cardCount: Int) -> [Card] {
+        // Array for card value string names
+        var stringValues: [String] = []
+        // Get array on ints for card values
+        var ints = createIntArray(withCountOf: cardCount/2)
+        // Add duplicate values to array
+        ints.append(contentsOf: ints)
+        // Shuffle values
+        let shuffledValues = ints.shuffled()
+        // Add to string values formatted to match asset title
+        for i in 0..<shuffledValues.count {
+            stringValues.append("cardFace\(shuffledValues[i])")
+        }
+        // Retrun array as cards with string values
+        return cards(from: stringValues)
+    }
+    // Return random ints array of specified length
+    func createIntArray(withCountOf count: Int) -> [Int] {
+        // Arrays to hold random Int
+        var intArray = [Int]()
+        // Random Int value
+        var randomInt = Int()
+        // Var for duplicate check
+        var matchingInts = [Int]()
+        
+        while intArray.count < count {
+            // Get random int value
+            randomInt = Int.random(in: 1...143)
+            // Filter for matches to randomInt in array of Ints
+            matchingInts = intArray.filter({ (int) -> Bool in
+                return int == randomInt
+            })
+            if matchingInts.count == 0 {
+                // Assign random int to array
+                intArray.append(randomInt)
+            }
+        }
+        return intArray
+    }
+    // Convert array of strings to array of Cards
+    func cards(from strings: [String]) -> [Card]{
+        var cards: [Card] = []
+        for i in 0..<strings.count {
+            cards.append(Card(imageString: strings[i]))
+        }
+        return cards
+    }
+  
+    
     // Function to end game
     func endGame() {
         if matchCount == 15 {
@@ -64,46 +114,5 @@ final class GameViewModel: ObservableObject {
         
         // TODO: Reload table view
         
-    }
-    
-    
-    
-    //Function to assign random values to game cards
-    func assignValues(cardCount: Int) -> [Card] {
-        // Arrays to hold image numbers
-        var imageNumbers = [Int]()
-        // Get random number for face card value
-        var randomInt = Int()
-        var matchingNumbers = [Int]()
-        while imageNumbers.count < cardCount/2 {
-            // Get random int value
-            randomInt = Int.random(in: 1...143)
-            // Filter for matches to randomInt in arrayOfInts
-            matchingNumbers = imageNumbers.filter({ (number) -> Bool in
-                return number == randomInt
-            })
-            if matchingNumbers.count == 0 {
-                // Assign random int to array
-                imageNumbers.append(randomInt)
-            }
-        }
-        // Add image numbers to self
-        for int in 0..<imageNumbers.count {
-            imageNumbers.append(imageNumbers[int])
-        }
-        let shuffledNumbers = imageNumbers.shuffled()
-        var imageStrings: [String] = []
-        for i in 0..<shuffledNumbers.count {
-            imageStrings.append("cardFace\(shuffledNumbers[i])")
-        }
-        return createCards(from: imageStrings)
-    }
-    
-    func createCards(from strings: [String]) -> [Card]{
-        var cards: [Card] = []
-        for i in 0..<strings.count {
-            cards.append(Card(imageString: strings[i]))
-        }
-        return cards
     }
 }

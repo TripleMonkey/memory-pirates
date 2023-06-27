@@ -25,12 +25,12 @@
 		9E6E72B72A41F1D600BB009B /* countDownSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9E6E72B22A41F1D600BB009B /* countDownSound.mp3 */; };
 		9E6E72B82A41F1D600BB009B /* completeSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9E6E72B32A41F1D600BB009B /* completeSound.mp3 */; };
 		9E6E72BB2A41F21D00BB009B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E6E72B92A41F21C00BB009B /* LaunchScreen.storyboard */; };
-		9E6E72BC2A41F21D00BB009B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E6E72BA2A41F21D00BB009B /* Main.storyboard */; };
 		9E6E72C02A41F30B00BB009B /* ViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6E72BD2A41F30B00BB009B /* ViewControllerExtension.swift */; };
 		9E6E72C12A41F30B00BB009B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6E72BE2A41F30B00BB009B /* ViewController.swift */; };
 		9E6E72C72A41F3EE00BB009B /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6E72C32A41F3ED00BB009B /* Audio.swift */; };
 		9E6E72C82A41F3EE00BB009B /* Playthrough.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6E72C42A41F3ED00BB009B /* Playthrough.swift */; };
 		9ED3D78F2A42AF3800BD31F9 /* GameCenterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED3D78E2A42AF3800BD31F9 /* GameCenterManager.swift */; };
+		9EDA4AB02A4B09F400A3FA5D /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EDA4AAF2A4B09F400A3FA5D /* CardView.swift */; };
 		9EDDCBFB2A3CF4C5006E7B01 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EDDCBFA2A3CF4C5006E7B01 /* AppDelegate.swift */; };
 		9EDDCBFD2A3CF4C5006E7B01 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EDDCBFC2A3CF4C5006E7B01 /* SceneDelegate.swift */; };
 		9EDDCC052A3CF4C5006E7B01 /* MemoryPirates.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9EDDCC032A3CF4C5006E7B01 /* MemoryPirates.xcdatamodeld */; };
@@ -56,13 +56,13 @@
 		9E6E72B22A41F1D600BB009B /* countDownSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = countDownSound.mp3; sourceTree = "<group>"; };
 		9E6E72B32A41F1D600BB009B /* completeSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = completeSound.mp3; sourceTree = "<group>"; };
 		9E6E72B92A41F21C00BB009B /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
-		9E6E72BA2A41F21D00BB009B /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		9E6E72BD2A41F30B00BB009B /* ViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerExtension.swift; sourceTree = "<group>"; };
 		9E6E72BE2A41F30B00BB009B /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		9E6E72C32A41F3ED00BB009B /* Audio.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Audio.swift; sourceTree = "<group>"; };
 		9E6E72C42A41F3ED00BB009B /* Playthrough.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Playthrough.swift; sourceTree = "<group>"; };
 		9ED3D78D2A42004A00BD31F9 /* MemoryPirates.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MemoryPirates.entitlements; sourceTree = "<group>"; };
 		9ED3D78E2A42AF3800BD31F9 /* GameCenterManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCenterManager.swift; sourceTree = "<group>"; };
+		9EDA4AAF2A4B09F400A3FA5D /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		9EDDCBF72A3CF4C5006E7B01 /* MemoryPirates.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MemoryPirates.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9EDDCBFA2A3CF4C5006E7B01 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9EDDCBFC2A3CF4C5006E7B01 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -103,11 +103,11 @@
 			isa = PBXGroup;
 			children = (
 				9E6E72B92A41F21C00BB009B /* LaunchScreen.storyboard */,
-				9E6E72BA2A41F21D00BB009B /* Main.storyboard */,
 				9E1C358C2A476D37002C4661 /* ContentView.swift */,
 				9E2C45ED2A4873F600BE1F69 /* GameHeaderView.swift */,
 				9E1C358A2A4754D7002C4661 /* GameAreaView.swift */,
 				9E2C45EF2A48742100BE1F69 /* GameFooterView.swift */,
+				9EDA4AAF2A4B09F400A3FA5D /* CardView.swift */,
 				9E1C35792A468423002C4661 /* OptionsView.swift */,
 				9E1C357B2A469978002C4661 /* AudioOptionsView.swift */,
 				9E1C357E2A46A1A9002C4661 /* LeaderboardTableView.swift */,
@@ -244,7 +244,6 @@
 				9EDDCC072A3CF4C8006E7B01 /* Assets.xcassets in Resources */,
 				9E6E72B82A41F1D600BB009B /* completeSound.mp3 in Resources */,
 				9E6E72B52A41F1D600BB009B /* noMatchSound.mp3 in Resources */,
-				9E6E72BC2A41F21D00BB009B /* Main.storyboard in Resources */,
 				9E6E72B72A41F1D600BB009B /* countDownSound.mp3 in Resources */,
 				9E6E72BB2A41F21D00BB009B /* LaunchScreen.storyboard in Resources */,
 				9E6E72B62A41F1D600BB009B /* matchSound.mp3 in Resources */,
@@ -266,6 +265,7 @@
 				9E1C35842A473888002C4661 /* EmptyListMessage.swift in Sources */,
 				9E2C45F02A48742100BE1F69 /* GameFooterView.swift in Sources */,
 				9E1C357A2A468423002C4661 /* OptionsView.swift in Sources */,
+				9EDA4AB02A4B09F400A3FA5D /* CardView.swift in Sources */,
 				9E2C45F22A4936D900BE1F69 /* Card.swift in Sources */,
 				9E1C35872A4741E9002C4661 /* GameResultsView.swift in Sources */,
 				9E1C358D2A476D37002C4661 /* ContentView.swift in Sources */,
@@ -411,10 +411,8 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MemoryPirates/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Memory Pirates";
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.games";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -443,10 +441,8 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MemoryPirates/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Memory Pirates";
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.games";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
