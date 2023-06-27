@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct GameHeaderView: View {
+    
     var body: some View {
         ZStack {
             Rectangle()
@@ -33,15 +34,7 @@ struct GameHeaderView: View {
             .foregroundColor(Color("lightText"))
             .shadow(color: .black, radius: 0, x: -2, y: 2)
         }
-        .frame(height: UIScreen.main.bounds.height*0.2).toolbar {
-            Button("About") {
-                print("About tapped!")
-            }
-
-            Button("Help") {
-                print("Help tapped!")
-            }
-        }
+        .frame(height: UIScreen.main.bounds.height*0.12)
     }
 }
 

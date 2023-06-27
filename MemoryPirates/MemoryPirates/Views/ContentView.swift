@@ -9,21 +9,25 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State var showingOptions = false
+    @State var showingOptions: Bool = false
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ZStack {
+                // Background
                 Rectangle()
                     .fill(Color("lightBackground"))
                     .ignoresSafeArea()
+                // Foreground views
                 VStack{
                     GameHeaderView()
                     GameAreaView()
                     GameFooterView()
                 }
+                // Navigation Items
+                NavigationItemsView()
+                    .padding()
             }
-            
         }
         .background(Color("lightBackground"))
     }
