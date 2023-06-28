@@ -9,21 +9,30 @@ import SwiftUI
 
 struct CardView: View {
     
+    @StateObject var gameVM = GameViewModel()
     @State var imageName = "startingImage"
+    var card: Card
     var cardValue: String
+    
+    init(card: Card) {
+        self.card = card
+        self.cardValue = card.value
+    }
     
     var body: some View {
         Image(imageName)
             .resizable()
             .scaledToFit()
             .onTapGesture {
-                self.imageName = self.imageName == cardValue ? "startingImage" : cardValue
+                card.faceUp.toggle()
+                print("Card face up: \(card.faceUp)")
+                self.imageName = card.faceUp ? cardValue : "startingImage"
             }
     }
 }
 
 struct CardView_Previews: PreviewProvider {
     static var previews: some View {
-        CardView(cardValue: "cardFace12")
+        CardView(card: Card(imageString: "cardFace134"))
     }
 }

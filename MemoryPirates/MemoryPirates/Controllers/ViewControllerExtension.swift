@@ -23,7 +23,7 @@
 //    // Start game by assigning and showing cards images for 5 seconds
 //    func startGame() {
 //        // Instance of new game
-//        currentGame = Playthrough(cardValues: <#T##[String]#>)
+//        currentGame = Playthrough(cards: [Card])
 //        // Clear any previous matched pairs
 //        clearMatches()
 //        // Drill down in stack view to get row count row count
@@ -132,7 +132,7 @@
 //    
 //    // Clear matches
 //    func clearMatches() {
-//        for i in 0..<currentGame.cardValues.count {
+//        for i in 0..<currentGame.cards.count {
 //            // Make sure object is UIButton
 //            guard let button = self.view.viewWithTag(i+1) as? UIButton
 //            // Else check next object
@@ -184,7 +184,7 @@
 //    // Function to all hide or show cards
 //    @objc func flipAllCards() {
 //        
-//        for i in 0..<currentGame.cardValues.count {
+//        for i in 0..<currentGame.cards.count {
 //            // Make sure object is UIButton
 //            guard let cardButton = self.view.viewWithTag(i+1) as? UIButton
 //            // Else check next object

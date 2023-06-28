@@ -28,7 +28,7 @@ struct GameAreaView: View {
         Group {
             LazyVGrid(columns: columns) {
                 ForEach(gameVM.currentGame?.cards ?? openingCards.cards) { card in
-                    CardView(cardValue: card.value)
+                    CardView(card: card)
                 }
             }
             .frame(minHeight: UIScreen.main.bounds.height*0.6)
