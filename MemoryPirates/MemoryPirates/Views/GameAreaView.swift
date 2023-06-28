@@ -16,7 +16,12 @@ struct GameAreaView: View {
     }
     
     let columns: [GridItem] = [
-        GridItem(.adaptive(minimum: 70, maximum: 100), spacing: 1.0, alignment: .leading)
+        GridItem(.flexible(minimum: 70, maximum: 100), spacing: 1.0, alignment: .leading),
+        GridItem(.flexible(minimum: 70, maximum: 100), spacing: 1.0, alignment: .leading),
+        GridItem(.flexible(minimum: 70, maximum: 100), spacing: 1.0, alignment: .leading),
+        GridItem(.flexible(minimum: 70, maximum: 100), spacing: 1.0, alignment: .leading),
+        GridItem(.flexible(minimum: 70, maximum: 100), spacing: 1.0, alignment: .leading)
+        
     ]
     
     var body: some View {

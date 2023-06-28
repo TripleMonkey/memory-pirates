@@ -24,6 +24,7 @@ struct ContentView: View {
                 VStack{
                     GameHeaderView()
                     GameAreaView()
+                        .padding()
                     GameFooterView()
                 }
             }
