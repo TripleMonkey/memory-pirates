@@ -20,9 +20,9 @@ struct NavigationItemsView: View {
                 // Profile link
                 NavigationLink(destination: ProfileView()
                     .navigationTitle("Profile")) {
-                    Label("Profile", systemImage: "person.fill")
-                        .labelStyle(.iconOnly)
-                }
+                        Label("Profile", systemImage: "person.fill")
+                            .labelStyle(.iconOnly)
+                    }
             }
             Spacer()
         }

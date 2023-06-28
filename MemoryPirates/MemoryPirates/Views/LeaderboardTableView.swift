@@ -18,7 +18,7 @@ struct LeaderboardTableView: View {
                 Text("Game History")
                     .font(.title3)
                     .fontWeight(.bold)
-                .padding()
+                    .padding()
                 Spacer()
             }
             List {
@@ -37,7 +37,7 @@ struct LeaderboardTableView: View {
         .foregroundColor(Color("darkBackground"))
         .padding()
     }
-        
+    
 }
 
 struct LeaderboardTableView_Previews: PreviewProvider {
