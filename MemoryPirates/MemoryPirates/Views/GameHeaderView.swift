@@ -34,7 +34,7 @@ struct GameHeaderView: View {
             .foregroundColor(Color("lightText"))
             .shadow(color: .black, radius: 0, x: -2, y: 2)
         }
-        .frame(height: UIScreen.main.bounds.height*0.12)
+        //.frame(maxHeight: UIScreen.main.bounds.height*0.08)
     }
 }
 

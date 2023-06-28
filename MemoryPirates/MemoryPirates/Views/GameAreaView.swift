@@ -16,7 +16,7 @@ struct GameAreaView: View {
     }
     
     let columns: [GridItem] = [
-        GridItem(.adaptive(minimum: 70, maximum: 100), spacing: 1.0, alignment: .center)
+        GridItem(.adaptive(minimum: 70, maximum: 100), spacing: 1.0, alignment: .leading)
     ]
     
     var body: some View {
@@ -26,7 +26,7 @@ struct GameAreaView: View {
                     CardView(cardValue: card.value)
                 }
             }
-            .frame(height: UIScreen.main.bounds.height*0.5)
+            .frame(minHeight: UIScreen.main.bounds.height*0.6)
             .background(Image("foggyWater")
                 .resizable()
                 .scaledToFill())

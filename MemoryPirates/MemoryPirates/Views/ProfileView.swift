@@ -25,7 +25,6 @@ struct ProfileView: View {
                 LeaderboardTableView()
                 Spacer()
             }
-            //.background(Color("darkBackground"))
         }
     }
 }

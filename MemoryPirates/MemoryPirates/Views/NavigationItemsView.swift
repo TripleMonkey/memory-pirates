@@ -16,14 +16,13 @@ struct NavigationItemsView: View {
                 Button("reset") {
                     // TODO: add reset function here
                 }
-                .padding(.trailing)
+                .offset(y: 3)
                 // Profile link
                 NavigationLink(destination: ProfileView()
                     .navigationTitle("Profile")) {
                     Label("Profile", systemImage: "person.fill")
                         .labelStyle(.iconOnly)
                 }
-                .padding(.trailing)
             }
             Spacer()
         }

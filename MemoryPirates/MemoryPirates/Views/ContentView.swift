@@ -18,16 +18,19 @@ struct ContentView: View {
                 Rectangle()
                     .fill(Color("lightBackground"))
                     .ignoresSafeArea()
+                Rectangle()
+                    .fill(Color("darkBackground"))
                 // Foreground views
                 VStack{
                     GameHeaderView()
                     GameAreaView()
                     GameFooterView()
                 }
-                // Navigation Items
-                NavigationItemsView()
-                    .padding()
             }
+            .toolbar(content: {
+                NavigationItemsView()
+            })
+            .toolbar(.visible, for: .navigationBar, .tabBar)
         }
         .background(Color("lightBackground"))
     }

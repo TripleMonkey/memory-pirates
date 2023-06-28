@@ -106,10 +106,10 @@
 			children = (
 				9E6E72B92A41F21C00BB009B /* LaunchScreen.storyboard */,
 				9E1C358C2A476D37002C4661 /* ContentView.swift */,
+				9EDA4AAF2A4B09F400A3FA5D /* CardView.swift */,
 				9EDA4AB12A4B640300A3FA5D /* NavigationItemsView.swift */,
 				9E2C45ED2A4873F600BE1F69 /* GameHeaderView.swift */,
 				9E1C358A2A4754D7002C4661 /* GameAreaView.swift */,
-				9EDA4AAF2A4B09F400A3FA5D /* CardView.swift */,
 				9E2C45EF2A48742100BE1F69 /* GameFooterView.swift */,
 				9E1C35792A468423002C4661 /* ProfileView.swift */,
 				9E1C357B2A469978002C4661 /* AudioOptionsView.swift */,
