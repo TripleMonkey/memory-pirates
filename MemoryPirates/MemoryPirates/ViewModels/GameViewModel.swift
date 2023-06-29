@@ -9,8 +9,12 @@ import Foundation
 import UIKit
 import CoreData
 
+
 final class GameViewModel: ObservableObject {
     
+    // Singlton pattern to maintain single game vm instance
+    static let shared = GameViewModel()
+    private init() { }
     
     @Published var currentGame: Playthrough?
     // Timer instance
@@ -21,19 +25,46 @@ final class GameViewModel: ObservableObject {
     @Published var moves: Int = 0
     // Bool for play button visibility
     @Published var playButtonIsActive: Bool = false
+    // String to hold current game elapsed time
+    @Published var currentElapsedTimeLabel = "0"
     
     // Context
     var managedObjectContext = AppDelegate.sharedContext
     
     // Array to hold tapped cards
-    var matchAttempt = [Int]()
+    var currentMove = [Card]()
     
     // MARK: Start Game
+    // Setup new game
+    func prepareNewGame() {
+        resetGame()
+        currentGame = Playthrough(cards: assignValues(cardCount: 30))
+        playButtonIsActive = true
+    }
+    
+    // Reset game state
+    func resetGame() {
+        currentGame = nil
+        elapsedTimer?.invalidate()
+        matchCount = 0
+        moves = 0
+        currentMove.removeAll()
+    }
     
     // Function to start new game
     func startGame() {
-        // Create new playthrough
-        currentGame = Playthrough(cards: assignValues(cardCount: 30))
+        guard let game = currentGame else { return }
+        // Show cards
+        showAllCards()
+        // Set timer to hide cards after 5 seconds
+        Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(showAllCards), userInfo: nil, repeats: false)
+        playAudio(sound: "countDownSound", type: ".mp3")
+        // Wait 5 seconds then set playthrough start time after timer stops
+        Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(setStartTime), userInfo: nil, repeats: false)
+        if game.startTime != nil {
+            // Start elapsed time counter
+            self.elapsedTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(updateElapsedTime), userInfo: nil, repeats: true)
+        }
     }
     
     //Function to assign random values to game cards
@@ -89,94 +120,64 @@ final class GameViewModel: ObservableObject {
     
     // MARK: Game Play
     
-    // Reset game state
-    func resetGame() {
-        currentGame = nil
-        elapsedTimer?.invalidate()
-        matchCount = 0
-        moves = 0
-        playButtonIsActive = true
-    }
-    
     // Clear matches
     func clearMatches() {
-        
+        guard let game = currentGame else { return }
+        for i in 0..<game.cards.count {
+            currentGame!.cards[i].position = .faceDown
+        }
     }
-//        for i in 0..<(currentGame?.cards.count ?? 1) {
-//
-//            // Make sure object is UIButton
-//            guard let button = self.view.viewWithTag(i+1) as? UIButton
-//            // Else check next object
-//            else { continue }
-//            // Reset button states and match list
-//            button.isSelected = false
-//            button.isUserInteractionEnabled = true
-//            button.alpha = 1
-//            matchAttempt.removeAll()
-//        }
-  //  }
     
-    // Check for successful match
-    func matchCheck() {
-        
-    }
-        // If guard passes, 2 buttons have been selected and can be compared
-//        guard let cardOne = view.viewWithTag(matchAttempt[0]) as? UIButton,
-//              let cardTwo = view.viewWithTag(matchAttempt[1]) as? UIButton
-//        else { return }
-//        // Increase move count
-//        moves += 2
-//        moveCountLabel.text = moves.description
-//        // Compare card values
-//        if cardOne.image(for: .selected) == cardTwo.image(for: .selected) {
-//            playAudio(sound: "matchSound", type: ".mp3")
-//            // Animate change to matched state
-//            animateCardMatch(buttonOne: cardOne, buttonTwo: cardTwo)
-//            // Clear matchAttempt add to match count
-//            matchAttempt.removeAll()
-//            matchCount += 1
-//            // Update matched label
-//            matchedCountLabel.text = "\(matchCount.description) / 15"
-//            if matchCount == 15 {
-//                endGame()
-//            }
-//        }
-//        else {
-//            playAudio(sound: "noMatchSound", type: ".mp3")
-//            // Flip selected cards back
-//            cardOne.isSelected = false
-//            cardOne.isUserInteractionEnabled = true
-//            cardTwo.isSelected = false
-//            cardTwo.isUserInteractionEnabled = true
-//            matchAttempt.removeAll()
-//        }
-//    }
-
     // Function to all hide or show cards
-    func flipAllCards() {
-        
+    @objc func showAllCards() {
+        guard let game = currentGame else { return }
+        for i in 0..<game.cards.count {
+            // Show card value
+            game.cards[i].position = .faceUp
+        }
     }
-//        for i in 0..<currentGame.cardValues.count {
-//            // Make sure object is UIButton
-//            guard let cardButton = self.view.viewWithTag(i+1) as? UIButton
-//            // Else check next object
-//            else { continue }
-//            // Toggle button state and user interaction
-//            cardButton.isSelected.toggle()
-//            cardButton.isUserInteractionEnabled.toggle()
-//        }
-//        // Toggle reset button
-//        resetButton.isEnabled.toggle()
- //   }
+
+    // Check for successful match
+    private func matchCheck() {
+        guard currentMove.count == 2 else { return }
+        if currentMove[0].value == currentMove[1].value {
+            playAudio(sound: "matchSound", type: ".mp3")
+            self.matchCount += 1
+            print(matchCount)
+            // Set both cards to matched position
+            currentMove[0].position = .matched
+            currentMove[1].position = .matched
+        } else {
+            playAudio(sound: "noMatchSound", type: ".mp3")
+            // Return both cards to face down position
+            currentMove[0].position = .faceDown
+            currentMove[1].position = .faceDown
+        }
+        // Clear Match array
+        currentMove.removeAll()
+    }
+    
+    // Func to record card taps
+    func checkCard(card: Card) {
+        card.position = .faceUp
+        switch self.currentMove.count {
+        case 0:
+            currentMove.append(card)
+        case 1:
+            currentMove.append(card)
+        default:
+            print("More than 2 cards in match array. How could you let it come to this?")
+            currentMove.removeAll()
+        }
+        if currentMove.count == 2 {
+            matchCheck()
+        }
+        print("Card count: \(currentMove.count)")
+    }
+    
     
     // Function to toggle play button and game state
-    func toggleGameState() {
-        
-    }
-//        cardStackView.isUserInteractionEnabled.toggle()
-//        playButton.isHidden.toggle()
-//        playButton.isUserInteractionEnabled.toggle()
-//        resetButton.isEnabled.toggle()
+    @objc func toggleGameState() {
 //        if !playButton.isHidden {
 //            animateScale(view: playButton, minScale: 0.89, timesRepeating: .infinity)
 //            cardStackView.alpha = 0.5
@@ -184,8 +185,27 @@ final class GameViewModel: ObservableObject {
 //        else {
 //            cardStackView.alpha = 1.0
 //        }
- //   }
-    
+    }
+
+    // Function to diplay elapsed time
+    @objc func updateElapsedTime() {
+        // Create formatter to convert double to formatted string
+        let componentFormatter = DateComponentsFormatter()
+        componentFormatter.includesApproximationPhrase = false
+        componentFormatter.allowedUnits = [.hour, .minute, .second]
+        componentFormatter.unitsStyle = .positional
+        componentFormatter.zeroFormattingBehavior = .pad
+        // Set current time label with formatted elapsed time
+        guard let game = currentGame else { return }
+        currentElapsedTimeLabel = componentFormatter.string(from: game.startTime?.timeIntervalSinceNow ?? 0) ?? "0"
+    }
+
+    // Function to set start time
+    @objc func setStartTime() {
+        guard let game = currentGame else { return }
+        game.startTime = Date()
+    }
+
     // MARK: End Game
     // Function to end game
     func endGame() {

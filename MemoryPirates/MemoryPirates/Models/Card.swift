@@ -14,10 +14,14 @@ class Card: Identifiable {
     let value: String
     
     // Card position
-    var faceUp = false
+    //var faceUp = false
+    var position: CardPosition = .faceDown
     
     init(imageString: String) {
         value = imageString
     }
 }
 
+enum CardPosition {
+    case faceUp, faceDown, matched
+}

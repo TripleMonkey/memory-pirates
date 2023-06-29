@@ -9,10 +9,10 @@ import SwiftUI
 
 struct GameAreaView: View {
     
-    @StateObject var gameVM = GameViewModel()
+    @StateObject var gameVM = GameViewModel.shared
     
     var openingCards: Playthrough {
-        Playthrough(cards: GameViewModel().assignValues(cardCount: 30))
+        Playthrough(cards: GameViewModel.shared.assignValues(cardCount: 30))
     }
     
     let columns: [GridItem] = [
@@ -25,7 +25,7 @@ struct GameAreaView: View {
     ]
     
     var body: some View {
-        Group {
+        ZStack {
             LazyVGrid(columns: columns) {
                 ForEach(gameVM.currentGame?.cards ?? openingCards.cards) { card in
                     CardView(card: card)
@@ -35,6 +35,9 @@ struct GameAreaView: View {
             .background(Image("foggyWater")
                 .resizable()
                 .scaledToFill())
+            if gameVM.playButtonIsActive {
+                PlayButton()
+            }
         }
     }
 }
