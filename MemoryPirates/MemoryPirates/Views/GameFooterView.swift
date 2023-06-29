@@ -12,7 +12,6 @@ struct GameFooterView: View {
         ZStack {
             Rectangle()
                 .foregroundColor(Color("darkBackground"))
-                .background(Color("lightBackground"))
             Grid {
                 HStack {
                     Spacer()
@@ -27,7 +26,6 @@ struct GameFooterView: View {
             .foregroundColor(Color("lightText"))
             .shadow(color: .black, radius: 0, x: -2, y: 2)
         }
-        // .frame(maxHeight: UIScreen.main.bounds.height*0.04)
     }
 }
 

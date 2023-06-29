@@ -18,13 +18,10 @@ struct ContentView: View {
                 Rectangle()
                     .fill(Color("lightBackground"))
                     .ignoresSafeArea()
-                Rectangle()
-                    .fill(Color("darkBackground"))
                 // Foreground views
                 VStack{
                     GameHeaderView()
-                    GameAreaView()
-                        .padding()
+                    GameAreaGridView()
                     GameFooterView()
                 }
             }

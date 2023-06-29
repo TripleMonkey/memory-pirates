@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct GameAreaView: View {
+struct GameAreaGridView: View {
     
     @StateObject var gameVM = GameViewModel.shared
     
@@ -31,6 +31,7 @@ struct GameAreaView: View {
                     CardView(card: card)
                 }
             }
+            .padding()
             .frame(minHeight: UIScreen.main.bounds.height*0.6)
             .background(Image("foggyWater")
                 .resizable()
@@ -44,6 +45,6 @@ struct GameAreaView: View {
 
 struct GameAreaView_Previews: PreviewProvider {
     static var previews: some View {
-        GameAreaView()
+        GameAreaGridView()
     }
 }

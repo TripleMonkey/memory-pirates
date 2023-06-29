@@ -14,7 +14,9 @@ final class GameViewModel: ObservableObject {
     
     // Singlton pattern to maintain single game vm instance
     static let shared = GameViewModel()
-    private init() { }
+    private init() {
+        prepareNewGame()
+    }
     
     @Published var currentGame: Playthrough?
     // Timer instance
@@ -27,6 +29,8 @@ final class GameViewModel: ObservableObject {
     @Published var playButtonIsActive: Bool = false
     // String to hold current game elapsed time
     @Published var currentElapsedTimeLabel = "0"
+    // Set opacity of cards based on game state
+    @Published var cardOpacity: Double = 1.0
     
     // Context
     var managedObjectContext = AppDelegate.sharedContext
@@ -35,35 +39,48 @@ final class GameViewModel: ObservableObject {
     var currentMove = [Card]()
     
     // MARK: Start Game
-    // Setup new game
+    // Reset or setup new game
     func prepareNewGame() {
-        resetGame()
-        currentGame = Playthrough(cards: assignValues(cardCount: 30))
-        playButtonIsActive = true
-    }
-    
-    // Reset game state
-    func resetGame() {
+        // Reset game values
         currentGame = nil
         elapsedTimer?.invalidate()
         matchCount = 0
         moves = 0
         currentMove.removeAll()
+        // Create new playthrough
+        currentGame = Playthrough(cards: assignValues(cardCount: 30))
+        // Show Play button
+        playButtonIsActive = true
     }
     
     // Function to start new game
     func startGame() {
         guard let game = currentGame else { return }
+        // Hide play button
+        playButtonIsActive = false
         // Show cards
-        showAllCards()
+        showCardValues()
         // Set timer to hide cards after 5 seconds
-        Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(showAllCards), userInfo: nil, repeats: false)
+        Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(hideCardValues), userInfo: nil, repeats: false)
         playAudio(sound: "countDownSound", type: ".mp3")
         // Wait 5 seconds then set playthrough start time after timer stops
         Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(setStartTime), userInfo: nil, repeats: false)
         if game.startTime != nil {
             // Start elapsed time counter
             self.elapsedTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(updateElapsedTime), userInfo: nil, repeats: true)
+        }
+    }
+    
+    // Function to toggle play button and game state
+    @objc func toggleGameState() {
+        // Toggle play button
+        playButtonIsActive.toggle()
+        // Set card opacity
+        if playButtonIsActive {
+            cardOpacity = 0.5
+        }
+        else {
+            cardOpacity = 0.5
         }
     }
     
@@ -128,12 +145,21 @@ final class GameViewModel: ObservableObject {
         }
     }
     
-    // Function to all hide or show cards
-    @objc func showAllCards() {
+    // Function to show all cards
+    @objc func showCardValues() {
         guard let game = currentGame else { return }
         for i in 0..<game.cards.count {
             // Show card value
             game.cards[i].position = .faceUp
+        }
+    }
+    
+    // Function to show all cards
+    @objc func hideCardValues() {
+        guard let game = currentGame else { return }
+        for i in 0..<game.cards.count {
+            // Hide card value
+            game.cards[i].position = .faceDown
         }
     }
 
@@ -173,18 +199,6 @@ final class GameViewModel: ObservableObject {
             matchCheck()
         }
         print("Card count: \(currentMove.count)")
-    }
-    
-    
-    // Function to toggle play button and game state
-    @objc func toggleGameState() {
-//        if !playButton.isHidden {
-//            animateScale(view: playButton, minScale: 0.89, timesRepeating: .infinity)
-//            cardStackView.alpha = 0.5
-//        }
-//        else {
-//            cardStackView.alpha = 1.0
-//        }
     }
 
     // Function to diplay elapsed time

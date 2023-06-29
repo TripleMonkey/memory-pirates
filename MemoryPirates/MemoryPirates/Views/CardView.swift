@@ -24,6 +24,7 @@ struct CardView: View {
     }
     
     var body: some View {
+        
         Image(imageName)
             .resizable()
             .scaledToFit()
@@ -40,6 +41,7 @@ struct CardView: View {
                     self.imageName = "matchedImage"
                 }
             }
+            .opacity(gameVM.cardOpacity)
     }
 }
 

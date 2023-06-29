@@ -13,7 +13,6 @@ struct GameHeaderView: View {
         ZStack {
             Rectangle()
                 .foregroundColor(Color("darkBackground"))
-                .background(Color("lightBackground"))
             HStack {
                 Spacer()
                 VStack(alignment: .leading) {
@@ -34,7 +33,6 @@ struct GameHeaderView: View {
             .foregroundColor(Color("lightText"))
             .shadow(color: .black, radius: 0, x: -2, y: 2)
         }
-        //.frame(maxHeight: UIScreen.main.bounds.height*0.08)
     }
 }
 

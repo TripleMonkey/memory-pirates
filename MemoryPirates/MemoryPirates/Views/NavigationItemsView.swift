@@ -8,13 +8,16 @@
 import SwiftUI
 
 struct NavigationItemsView: View {
+    
+    @StateObject var gameVM = GameViewModel.shared
+    
     var body: some View {
         VStack{
             HStack{
                 Spacer()
                 // Reset button
                 Button("reset") {
-                    // TODO: add reset function here
+                    gameVM.prepareNewGame()
                 }
                 .offset(y: 3)
                 // Profile link
