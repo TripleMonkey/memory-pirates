@@ -19,10 +19,12 @@ struct NavigationItemsView: View {
                 Button("reset") {
                     gameVM.prepareNewGame()
                 }
+                .opacity(gameVM.playButtonIsActive ? 0.0 : 1.0)
                 .offset(y: 3)
                 // Profile link
                 NavigationLink(destination: ProfileView()
-                    .navigationTitle("Profile")) {
+                    .navigationTitle("Profile")
+                    .navigationBarTitleDisplayMode(.inline)) {
                         Label("Profile", systemImage: "person.fill")
                             .labelStyle(.iconOnly)
                     }
