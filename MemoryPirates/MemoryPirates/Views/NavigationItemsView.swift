@@ -12,7 +12,6 @@ struct NavigationItemsView: View {
     @StateObject var gameVM = GameViewModel.shared
     
     var body: some View {
-        VStack{
             HStack{
                 Spacer()
                 // Reset button
@@ -30,7 +29,6 @@ struct NavigationItemsView: View {
                     }
             }
             Spacer()
-        }
     }
 }
 

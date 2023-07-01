@@ -11,11 +11,6 @@ struct ProfileView: View {
     
     var body: some View {
         ZStack {
-            // Background Fill
-            Rectangle()
-                .fill(Color("lightBackground"))
-                .ignoresSafeArea()
-            // Foreground views
             Rectangle()
                 .fill(Color("darkBackground"))
             VStack {
@@ -26,6 +21,7 @@ struct ProfileView: View {
                 Spacer()
             }
         }
+        .background(Color("lightBackground"))
     }
 }
 

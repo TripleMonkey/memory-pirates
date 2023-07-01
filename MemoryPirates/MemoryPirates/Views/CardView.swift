@@ -28,10 +28,13 @@ struct CardView: View {
         Image(imageName)
             .resizable()
             .scaledToFit()
+            .opacity(gameVM.cardOpacity)
             .onTapGesture {
-                //gameVM.currentMove.append(card)
-                gameVM.checkCard(card: card)
-                // Set image according to position
+                // Only allow tap gesture from starting image
+                if self.imageName == "startingImage" &&
+                   !gameVM.playButtonIsActive {
+                self.card.position = gameVM.handleCardTap(tappedCard: card)
+               // Set image according to position
                 switch card.position {
                 case .faceDown:
                     self.imageName = "startingImage"
@@ -40,8 +43,23 @@ struct CardView: View {
                 case .matched:
                     self.imageName = "matchedImage"
                 }
+                
+//                    card.position = .faceUp
+//                    self.imageName = cardValue
+//                    gameVM.handleCardTap(tappedCard: card)
+//                }
+//                //gameVM.currentMove.append(card)
+//                gameVM.checkCard(card: card)
+//                // Set image according to position
+//                switch card.position {
+//                case .faceDown:
+//                    self.imageName = "startingImage"
+//                case .faceUp:
+//                    self.imageName = cardValue
+//                case .matched:
+//                    self.imageName = "matchedImage"
+                }
             }
-            .opacity(gameVM.cardOpacity)
     }
 }
 

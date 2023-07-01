@@ -14,11 +14,6 @@ struct ContentView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                // Background
-                Rectangle()
-                    .fill(Color("lightBackground"))
-                    .ignoresSafeArea()
-                // Foreground views
                 VStack{
                     GameHeaderView()
                     GameAreaGridView()
@@ -29,8 +24,8 @@ struct ContentView: View {
                 NavigationItemsView()
             })
             .toolbar(.visible, for: .navigationBar, .tabBar)
+            .background(Color("lightBackground"))
         }
-        .background(Color("lightBackground"))
     }
 }
 
