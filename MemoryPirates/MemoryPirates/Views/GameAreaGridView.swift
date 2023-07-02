@@ -9,7 +9,7 @@ import SwiftUI
 
 struct GameAreaGridView: View {
     
-    @StateObject var gameVM = GameViewModel.shared
+    @StateObject private var gameVM = GameViewModel.shared
     
     var openingCards: Playthrough {
         Playthrough(cards: GameViewModel.shared.assignValues(cardCount: 30))
@@ -29,6 +29,9 @@ struct GameAreaGridView: View {
             LazyVGrid(columns: columns) {
                 ForEach(gameVM.currentGame?.cards ?? openingCards.cards) { card in
                     CardView(card: card)
+                        .onTapGesture {
+                            gameVM.compareCards()
+                        }
                 }
             }
             .padding()

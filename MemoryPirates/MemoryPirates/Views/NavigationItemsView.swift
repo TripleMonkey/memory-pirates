@@ -9,7 +9,7 @@ import SwiftUI
 
 struct NavigationItemsView: View {
     
-    @StateObject var gameVM = GameViewModel.shared
+    @StateObject private var gameVM = GameViewModel.shared
     
     var body: some View {
             HStack{

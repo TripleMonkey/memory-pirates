@@ -31,12 +31,12 @@ final class GameViewModel: ObservableObject {
     @Published var currentElapsedTimeLabel = "0"
     // Set opacity of cards based on game state
     @Published var cardOpacity: Double = 1.0
+    // Array to hold tapped cards
+    @Published var cardsTapped = [Card]()
     
     // Context
     var managedObjectContext = AppDelegate.sharedContext
     
-    // Array to hold tapped cards
-    var cardsTapped = [Card]()
     
     // MARK: Start Game
     // Reset or setup new game
@@ -49,22 +49,20 @@ final class GameViewModel: ObservableObject {
         cardsTapped.removeAll()
         // Create new playthrough
         currentGame = Playthrough(cards: assignValues(cardCount: 30))
-        // Show Play button
-        playButtonIsActive = true
+        toggleGameState()
     }
     
     // Function to start new game
     func startGame() {
         guard let game = currentGame else { return }
-        // Hide play button
-        playButtonIsActive = false
+        toggleGameState()
         // Show cards
-        showCardValues()
+        //  showCardValues()
         // Set timer to hide cards after 5 seconds
-        Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(hideCardValues), userInfo: nil, repeats: false)
+        //  Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(hideCardValues), userInfo: nil, repeats: false)
         playAudio(sound: "countDownSound", type: ".mp3")
         // Wait 5 seconds then set playthrough start time after timer stops
-        Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(setStartTime), userInfo: nil, repeats: false)
+        //   Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(setStartTime), userInfo: nil, repeats: false)
         if game.startTime != nil {
             // Start elapsed time counter
             self.elapsedTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(updateElapsedTime), userInfo: nil, repeats: true)
@@ -137,20 +135,12 @@ final class GameViewModel: ObservableObject {
     
     // MARK: Game Play
     
-    // Clear matches
-    func clearMatches() {
-        guard let game = currentGame else { return }
-        for i in 0..<game.cards.count {
-            currentGame!.cards[i].position = .faceDown
-        }
-    }
-    
     // Function to show all cards
     @objc func showCardValues() {
         guard let game = currentGame else { return }
-        for card in game.cards {
+        for i in 0..<game.cards.count {
             // Show card value
-            card.position = .faceUp
+            currentGame!.cards[i].faceUp = true
         }
     }
     
@@ -159,38 +149,32 @@ final class GameViewModel: ObservableObject {
         guard let game = currentGame else { return }
         for i in 0..<game.cards.count {
             // Hide card value
-            game.cards[i].position = .faceDown
+            game.cards[i].faceUp = true
         }
     }
     
     // Func to record card taps
-    func handleCardTap(tappedCard: Card) -> CardPosition {
+    func handleCardTap(tappedCard: Card) {
+        guard !playButtonIsActive else { return }
         // Add card to list
         if cardsTapped.count < 2 {
             cardsTapped.append(tappedCard)
-            tappedCard.position = .faceUp
+            tappedCard.faceUp = true
         }
         compareCards()
-        return .faceUp
     }
     
-    func compareCards() {
-        // Make sure array has exactly 2 cards
-        guard currentGame != nil, cardsTapped.count == 2 else { return }
-        
+    @objc func compareCards() {
+        guard cardsTapped.count == 2 else { return }
         if cardsTapped[0].value == cardsTapped[1].value {
             playAudio(sound: "matchSound", type: ".mp3")
             self.matchCount += 1
-            for i in 0..<cardsTapped.count {
-                // Show matched image
-                cardsTapped[i].position = .matched
-            }
+            cardsTapped[0].matched = true
+            cardsTapped[1].matched = true
         } else {
             playAudio(sound: "noMatchSound", type: ".mp3")
-            for i in 0..<cardsTapped.count {
-                // Hide card value
-                cardsTapped[i].position = .faceDown
-            }
+            cardsTapped[0].faceUp = false
+            cardsTapped[1].faceUp = false
         }
         // Clear list
         cardsTapped.removeAll()

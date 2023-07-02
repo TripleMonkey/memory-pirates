@@ -13,15 +13,11 @@ class Card: Identifiable {
     let id: UUID = UUID()
     let value: String
     
-    // Card position
-    //var faceUp = false
-    var position: CardPosition = .faceDown
+    // Card positions
+    var faceUp = false
+    var matched = false
     
     init(imageString: String) {
         value = imageString
     }
-}
-
-enum CardPosition {
-    case faceUp, faceDown, matched
 }
