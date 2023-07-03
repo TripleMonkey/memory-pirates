@@ -23,10 +23,11 @@ struct CardView: View {
             Image(card.value)
                 .resizable()
                 .scaledToFit()
-        } else {
+        } else if !card.faceUp && !card.matched {
             Image("startingImage")
                 .resizable()
                 .scaledToFit()
+                .opacity(gameVM.playButtonIsActive ? 0.5 : 1.0)
                 .onTapGesture {
                     if !gameVM.playButtonIsActive {
                         gameVM.handleCardTap(tappedCard: card)

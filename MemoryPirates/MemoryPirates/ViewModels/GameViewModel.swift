@@ -29,8 +29,6 @@ final class GameViewModel: ObservableObject {
     @Published var playButtonIsActive: Bool = false
     // String to hold current game elapsed time
     @Published var currentElapsedTimeLabel = "0"
-    // Set opacity of cards based on game state
-    @Published var cardOpacity: Double = 1.0
     // Array to hold tapped cards
     @Published var cardsTapped = [Card]()
     
@@ -43,43 +41,28 @@ final class GameViewModel: ObservableObject {
     func prepareNewGame() {
         // Reset game values
         currentGame = nil
-        elapsedTimer?.invalidate()
         matchCount = 0
         moves = 0
         cardsTapped.removeAll()
         // Create new playthrough
         currentGame = Playthrough(cards: assignValues(cardCount: 30))
-        toggleGameState()
+        // Toggle play button
+        playButtonIsActive.toggle()
     }
     
     // Function to start new game
     func startGame() {
         guard let game = currentGame else { return }
-        toggleGameState()
-        // Show cards
-        //  showCardValues()
-        // Set timer to hide cards after 5 seconds
-        //  Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(hideCardValues), userInfo: nil, repeats: false)
-        playAudio(sound: "countDownSound", type: ".mp3")
-        // Wait 5 seconds then set playthrough start time after timer stops
-        //   Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(setStartTime), userInfo: nil, repeats: false)
-        if game.startTime != nil {
-            // Start elapsed time counter
-            self.elapsedTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(updateElapsedTime), userInfo: nil, repeats: true)
-        }
-    }
-    
-    // Function to toggle play button and game state
-    @objc func toggleGameState() {
         // Toggle play button
         playButtonIsActive.toggle()
-        // Set card opacity
-        if playButtonIsActive {
-            cardOpacity = 0.5
-        }
-        else {
-            cardOpacity = 1.0
-        }
+        // 5second preview of card values
+        //previewAll(cards: game.cards)
+        
+        playAudio(sound: "countDownSound", type: ".mp3")
+//        if game.startTime != nil {
+//            // Start elapsed time counter
+//            self.elapsedTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(updateElapsedTime), userInfo: nil, repeats: true)
+//        }
     }
     
     //Function to assign random values to game cards
@@ -136,23 +119,24 @@ final class GameViewModel: ObservableObject {
     // MARK: Game Play
     
     // Function to show all cards
-    @objc func showCardValues() {
-        guard let game = currentGame else { return }
-        for i in 0..<game.cards.count {
+    func previewAll(cards: [Card]) {
+        for i in 0..<cards.count {
             // Show card value
-            currentGame!.cards[i].faceUp = true
+            cards[i].faceUp.toggle()
+            print("Card \(i) is faceUp: \(cards[i].faceUp)")
         }
+        DispatchQueue.main.asyncAfter(deadline: .now()+5, execute: { [self] in
+            for i in 0..<cards.count {
+                // Hide card value
+                currentGame!.cards[i].faceUp.toggle()
+                print("Card \(i) is faceUp: \(cards[i].faceUp)")
+            }
+            // Initialize game start time
+            guard currentGame != nil else { return }
+            currentGame!.startTime = Date.now
+        })
     }
-    
-    // Function to show all cards
-    @objc func hideCardValues() {
-        guard let game = currentGame else { return }
-        for i in 0..<game.cards.count {
-            // Hide card value
-            game.cards[i].faceUp = true
-        }
-    }
-    
+ 
     // Func to record card taps
     func handleCardTap(tappedCard: Card) {
         guard !playButtonIsActive else { return }
@@ -192,12 +176,7 @@ final class GameViewModel: ObservableObject {
         guard let game = currentGame else { return }
         currentElapsedTimeLabel = componentFormatter.string(from: game.startTime?.timeIntervalSinceNow ?? 0) ?? "0"
     }
-    
-    // Function to set start time
-    @objc func setStartTime() {
-        guard let game = currentGame else { return }
-        game.startTime = Date()
-    }
+
     
     // MARK: End Game
     // Function to end game
@@ -233,5 +212,12 @@ final class GameViewModel: ObservableObject {
         
         // TODO: Reload table view
         
+    }
+    
+    func formatTime(date: Date) -> String {
+        let timeFormatter = DateFormatter()
+        timeFormatter.dateFormat = "hh:mm:ss"
+        let formattedTime = timeFormatter.string(from: date)
+        return formattedTime
     }
 }

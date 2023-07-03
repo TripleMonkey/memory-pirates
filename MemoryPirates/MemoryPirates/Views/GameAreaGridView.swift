@@ -29,9 +29,6 @@ struct GameAreaGridView: View {
             LazyVGrid(columns: columns) {
                 ForEach(gameVM.currentGame?.cards ?? openingCards.cards) { card in
                     CardView(card: card)
-                        .onTapGesture {
-                            gameVM.compareCards()
-                        }
                 }
             }
             .padding()
