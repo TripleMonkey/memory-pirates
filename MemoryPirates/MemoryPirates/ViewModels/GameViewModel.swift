@@ -19,7 +19,7 @@ final class GameViewModel: ObservableObject {
     }
     
     @Published var currentGame: Playthrough?
-    // Timer instance
+    // Timer for elapsed time
     @Published var elapsedTimer: Timer?
     // Count Matches
     @Published var matchCount: Int = 0
@@ -52,17 +52,18 @@ final class GameViewModel: ObservableObject {
     
     // Function to start new game
     func startGame() {
-        guard let game = currentGame else { return }
+        //guard let game = currentGame else { return }
         // Toggle play button
         playButtonIsActive.toggle()
-        // 5second preview of card values
-        //previewAll(cards: game.cards)
+        // 5 second preview of card values
+       // previewAll(cards: game.cards)
+        currentGame?.startTime = .now
         
         playAudio(sound: "countDownSound", type: ".mp3")
-//        if game.startTime != nil {
-//            // Start elapsed time counter
-//            self.elapsedTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(updateElapsedTime), userInfo: nil, repeats: true)
-//        }
+        //        if game.startTime != nil {
+        //            // Start elapsed time counter
+        //            self.elapsedTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(updateElapsedTime), userInfo: nil, repeats: true)
+        //        }
     }
     
     //Function to assign random values to game cards
@@ -122,10 +123,10 @@ final class GameViewModel: ObservableObject {
     func previewAll(cards: [Card]) {
         for i in 0..<cards.count {
             // Show card value
-            cards[i].faceUp.toggle()
+            cards[i].faceUp = true
             print("Card \(i) is faceUp: \(cards[i].faceUp)")
         }
-        DispatchQueue.main.asyncAfter(deadline: .now()+5, execute: { [self] in
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5, execute: { [self] in
             for i in 0..<cards.count {
                 // Hide card value
                 currentGame!.cards[i].faceUp.toggle()
@@ -136,7 +137,7 @@ final class GameViewModel: ObservableObject {
             currentGame!.startTime = Date.now
         })
     }
- 
+    
     // Func to record card taps
     func handleCardTap(tappedCard: Card) {
         guard !playButtonIsActive else { return }
@@ -144,6 +145,7 @@ final class GameViewModel: ObservableObject {
         if cardsTapped.count < 2 {
             cardsTapped.append(tappedCard)
             tappedCard.faceUp = true
+            moves += 1
         }
         compareCards()
     }
@@ -155,6 +157,7 @@ final class GameViewModel: ObservableObject {
             self.matchCount += 1
             cardsTapped[0].matched = true
             cardsTapped[1].matched = true
+            self.endGame()
         } else {
             playAudio(sound: "noMatchSound", type: ".mp3")
             cardsTapped[0].faceUp = false
@@ -176,40 +179,41 @@ final class GameViewModel: ObservableObject {
         guard let game = currentGame else { return }
         currentElapsedTimeLabel = componentFormatter.string(from: game.startTime?.timeIntervalSinceNow ?? 0) ?? "0"
     }
-
+    
     
     // MARK: End Game
     // Function to end game
     func endGame() {
-        if matchCount == 15 {
-            guard let game = currentGame, let startTime = game.startTime else { return }
-            // Finalize game values and add new score to core data
-            let newScore = NSEntityDescription.insertNewObject(forEntityName: "Score", into: self.managedObjectContext) as! Score
-            newScore.totalMoves = Int16(moves)
-            newScore.timeStarted = startTime
-            newScore.playerName = UserDefaults.standard.string(forKey: "name")
-            newScore.elapsedTime = game.startTime!.timeIntervalSinceNow
-            
-            // Add score to game center leaderboard
-            // Pass elapsed time multipled by -100 to format for positive value in miliseconds
-            GameCenterManager().reportScore(chests: moves, timeInMilliseconds: Int(newScore.elapsedTime*(-100)))
-            
-            // Stop timer
-            elapsedTimer?.invalidate()
-            // End game animation and audio
-            playAudio(sound: "completeSound", type: ".mp3")
-            // Save to CoreData
-            do {
-                print("We are here")
-                try managedObjectContext.save()
-            }
-            catch {
-                print("Error saving score in endGame function.")
-            }
+        guard let game = currentGame,
+              let startTime = game.startTime,
+              matchCount == 15 else { return }
+        print("Match count: \(matchCount)")
+        // Finalize game values and add new score to core data
+        let newScore = NSEntityDescription.insertNewObject(forEntityName: "Score", into: self.managedObjectContext) as! Score
+        newScore.totalMoves = Int16(moves)
+        newScore.timeStarted = startTime
+        newScore.playerName = UserDefaults.standard.string(forKey: "name")
+        newScore.elapsedTime = game.startTime!.timeIntervalSinceNow
+        
+        // Add score to game center leaderboard
+        // Pass elapsed time multipled by 100 to format for positive value in miliseconds
+        GameCenterManager().reportScore(chests: moves, timeInMilliseconds: Int(newScore.elapsedTime*(100)))
+        
+        // Stop timer
+        elapsedTimer?.invalidate()
+        // End game animation and audio
+        playAudio(sound: "completeSound", type: ".mp3")
+        // Save to CoreData
+        do {
+            try managedObjectContext.save()
         }
+        catch {
+            print("Error saving score in endGame function.")
+        }
+        // Reset values
         moves = 0
         matchCount = 0
-        
+        prepareNewGame()
         // TODO: Reload table view
         
     }

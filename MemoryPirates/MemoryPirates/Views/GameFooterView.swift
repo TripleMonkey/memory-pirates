@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct GameFooterView: View {
+    
+    @StateObject var gameVM = GameViewModel.shared
+    
+    
     var body: some View {
         ZStack {
             Rectangle()
@@ -16,10 +20,10 @@ struct GameFooterView: View {
                 HStack {
                     Spacer()
                     Text("Matched")
-                    Text("0/15")
+                    Text("\(gameVM.matchCount)/15")
                     Spacer()
                     Text("Chests Opened")
-                    Text("0")
+                    Text("\(gameVM.moves)")
                     Spacer()
                 }
             }

@@ -19,7 +19,7 @@ struct AudioOptionsView: View {
                 .fontWeight(.bold)
                 .padding()
             Toggle("Mute", isOn: $muted)
-                .padding(40)
+                .padding([.leading, .trailing])
             HStack{
                 Text("Volume")
                     .padding(.trailing)
@@ -28,8 +28,9 @@ struct AudioOptionsView: View {
                 Slider(value: $volume)
                     .tint(.green)
             }
-            .padding(40)
+            .padding([.leading, .trailing])
         }
+        .padding()
         .fontWeight(.bold)
         .background(Rectangle()
             .fill(.white)
@@ -37,6 +38,7 @@ struct AudioOptionsView: View {
             .cornerRadius(10)
         )
         .foregroundColor(Color("darkBackground"))
+        .padding()
     }
 }
 

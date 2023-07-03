@@ -13,13 +13,52 @@ struct LeaderboardTableView: View {
     
     var body: some View {
         VStack {
-            HStack {
+            VStack {HStack {
                 Spacer()
                 Text("Game History")
                     .font(.title3)
                     .fontWeight(.bold)
                     .padding()
                 Spacer()
+            }
+                HStack {
+                    SortButton(sortValue: .bestTime)
+                    SortButton(sortValue: .fewestMoves)
+                    SortButton(sortValue: .newestGames)
+//                    Button {
+//                        gamesVM.sortSelector = .bestTime
+//                        gamesVM.fetchScores()
+//                    } label: {
+//                        Label("Best Time", systemImage: "gear.fill")
+//                            .labelStyle(.titleOnly)
+//                    }
+//                    .background(gamesVM.sortSelector == .bestTime ? Color("lightBackground") : Color("darkBackground"))
+//                    .foregroundColor(gamesVM.sortSelector == .bestTime ? .white : Color("lightText"))
+//                    .cornerRadius(25)
+//                    .buttonStyle(.bordered)
+//                    Button {
+//                        gamesVM.sortSelector = .fewestMoves
+//                        gamesVM.fetchScores()
+//                    } label: {
+//                        Label("Fewest Moves", systemImage: "gear.fill")
+//                            .labelStyle(.titleOnly)
+//                    }
+//                    .background(gamesVM.sortSelector == .fewestMoves ? Color("lightBackground") : Color("darkBackground"))
+//                    .foregroundColor(gamesVM.sortSelector == .fewestMoves ? .white : Color("lightText"))
+//                    .cornerRadius(25)
+//                    .buttonStyle(.bordered)
+//                    Button {
+//                        gamesVM.sortSelector = .newestGames
+//                        gamesVM.fetchScores()
+//                    } label: {
+//                        Label("Recent", systemImage: "gear.fill")
+//                            .labelStyle(.titleOnly)
+//                    }
+//                    .background(gamesVM.sortSelector == .newestGames ? Color("lightBackground") : Color("darkBackground"))
+//                    .foregroundColor(gamesVM.sortSelector == .newestGames ? .white : Color("lightText"))
+//                    .cornerRadius(25)
+//                    .buttonStyle(.bordered)
+                }
             }
             List {
                 ForEach(gamesVM.gameHistory) { game in

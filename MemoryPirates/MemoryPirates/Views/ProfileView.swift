@@ -16,7 +16,6 @@ struct ProfileView: View {
             VStack {
                 Spacer()
                 AudioOptionsView()
-                    .padding()
                 LeaderboardTableView()
                 Spacer()
             }

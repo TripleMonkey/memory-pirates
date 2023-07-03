@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9E0E845C2A5374AA002BF45E /* SortButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0E845B2A5374AA002BF45E /* SortButton.swift */; };
 		9E1C357A2A468423002C4661 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1C35792A468423002C4661 /* ProfileView.swift */; };
 		9E1C357C2A469978002C4661 /* AudioOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1C357B2A469978002C4661 /* AudioOptionsView.swift */; };
 		9E1C357F2A46A1A9002C4661 /* LeaderboardTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1C357E2A46A1A9002C4661 /* LeaderboardTableView.swift */; };
@@ -40,6 +41,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9E0E845B2A5374AA002BF45E /* SortButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortButton.swift; sourceTree = "<group>"; };
 		9E1C35792A468423002C4661 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		9E1C357B2A469978002C4661 /* AudioOptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioOptionsView.swift; sourceTree = "<group>"; };
 		9E1C357E2A46A1A9002C4661 /* LeaderboardTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardTableView.swift; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 				9E2C45EF2A48742100BE1F69 /* GameFooterView.swift */,
 				9E1C35792A468423002C4661 /* ProfileView.swift */,
 				9E1C357B2A469978002C4661 /* AudioOptionsView.swift */,
+				9E0E845B2A5374AA002BF45E /* SortButton.swift */,
 				9E1C357E2A46A1A9002C4661 /* LeaderboardTableView.swift */,
 				9E1C35862A4741E9002C4661 /* GameResultsView.swift */,
 				9E5840F02A4D054C005B939B /* PlayButton.swift */,
@@ -271,6 +274,7 @@
 				9E1C35892A47547C002C4661 /* GameViewModel.swift in Sources */,
 				9E1C35842A473888002C4661 /* EmptyListMessage.swift in Sources */,
 				9E2C45F02A48742100BE1F69 /* GameFooterView.swift in Sources */,
+				9E0E845C2A5374AA002BF45E /* SortButton.swift in Sources */,
 				9E1C357A2A468423002C4661 /* ProfileView.swift in Sources */,
 				9EDA4AB02A4B09F400A3FA5D /* CardView.swift in Sources */,
 				9E2C45F22A4936D900BE1F69 /* Card.swift in Sources */,
