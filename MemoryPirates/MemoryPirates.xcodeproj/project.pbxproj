@@ -88,6 +88,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9E0E845E2A53A508002BF45E /* ProfileViews */ = {
+			isa = PBXGroup;
+			children = (
+				9E1C35792A468423002C4661 /* ProfileView.swift */,
+				9E1C357B2A469978002C4661 /* AudioOptionsView.swift */,
+				9E1C357E2A46A1A9002C4661 /* LeaderboardTableView.swift */,
+				9E1C35862A4741E9002C4661 /* GameResultsView.swift */,
+				9E0E845B2A5374AA002BF45E /* SortButton.swift */,
+			);
+			path = ProfileViews;
+			sourceTree = "<group>";
+		};
+		9E0E845F2A53A530002BF45E /* GamePlayViews */ = {
+			isa = PBXGroup;
+			children = (
+				9EDA4AB12A4B640300A3FA5D /* NavigationItemsView.swift */,
+				9E2C45ED2A4873F600BE1F69 /* GameHeaderView.swift */,
+				9E1C358A2A4754D7002C4661 /* GameAreaGridView.swift */,
+				9E2C45EF2A48742100BE1F69 /* GameFooterView.swift */,
+				9EDA4AAF2A4B09F400A3FA5D /* CardView.swift */,
+				9E5840F02A4D054C005B939B /* PlayButton.swift */,
+			);
+			path = GamePlayViews;
+			sourceTree = "<group>";
+		};
 		9E1C35802A46A45D002C4661 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
@@ -110,17 +135,8 @@
 			children = (
 				9E6E72B92A41F21C00BB009B /* LaunchScreen.storyboard */,
 				9E1C358C2A476D37002C4661 /* ContentView.swift */,
-				9EDA4AB12A4B640300A3FA5D /* NavigationItemsView.swift */,
-				9E2C45ED2A4873F600BE1F69 /* GameHeaderView.swift */,
-				9E1C358A2A4754D7002C4661 /* GameAreaGridView.swift */,
-				9EDA4AAF2A4B09F400A3FA5D /* CardView.swift */,
-				9E2C45EF2A48742100BE1F69 /* GameFooterView.swift */,
-				9E1C35792A468423002C4661 /* ProfileView.swift */,
-				9E1C357B2A469978002C4661 /* AudioOptionsView.swift */,
-				9E0E845B2A5374AA002BF45E /* SortButton.swift */,
-				9E1C357E2A46A1A9002C4661 /* LeaderboardTableView.swift */,
-				9E1C35862A4741E9002C4661 /* GameResultsView.swift */,
-				9E5840F02A4D054C005B939B /* PlayButton.swift */,
+				9E0E845F2A53A530002BF45E /* GamePlayViews */,
+				9E0E845E2A53A508002BF45E /* ProfileViews */,
 				9E1C35852A474017002C4661 /* Utilities */,
 			);
 			path = Views;

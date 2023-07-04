@@ -26,6 +26,7 @@ struct GameResultsView: View {
                     Text("Time")
                     Text("\(leaderboardVM.formattedTime(seconds: gameTime))")
                 }
+                Spacer()
                 HStack {
                     Text("Chests Opened")
                     Text("\(gameMoves)")
@@ -33,7 +34,6 @@ struct GameResultsView: View {
             }
         }
         .foregroundColor(Color("darkBackground"))
-        .padding([.leading, .trailing])
     }
 }
 
