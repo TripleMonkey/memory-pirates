@@ -11,9 +11,9 @@ struct GameAreaGridView: View {
     
     @StateObject private var gameVM = GameViewModel.shared
     
-    var openingCards: Playthrough {
-        Playthrough(cards: GameViewModel.shared.assignValues(cardCount: 30))
-    }
+//    var openingCards: Deck {
+//        Deck(cards: DeckViewModel().assignValues(cardCount: 30))
+//    }
     
     let columns: [GridItem] = [
         GridItem(.flexible(minimum: 70, maximum: 100), spacing: 1.0, alignment: .leading),
@@ -27,7 +27,7 @@ struct GameAreaGridView: View {
     var body: some View {
         ZStack {
             LazyVGrid(columns: columns) {
-                ForEach(gameVM.currentGame?.cards ?? openingCards.cards) { card in
+                ForEach(gameVM.currentDeck.cards) { card in
                     CardView(card: card)
                 }
             }

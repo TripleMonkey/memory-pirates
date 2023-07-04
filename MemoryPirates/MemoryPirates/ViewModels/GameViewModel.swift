@@ -8,17 +8,17 @@
 import Foundation
 import UIKit
 import CoreData
-
+import AVKit
 
 final class GameViewModel: ObservableObject {
     
     // Singlton pattern to maintain single game vm instance
     static let shared = GameViewModel()
     private init() {
-        prepareNewGame()
+        currentDeck = DeckViewModel().prepareNewDeck(withCardCount: 30)
     }
     
-    @Published var currentGame: Playthrough?
+    @Published var currentDeck: Deck
     // Timer for elapsed time
     @Published var elapsedTimer: Timer?
     // Count Matches
@@ -32,32 +32,24 @@ final class GameViewModel: ObservableObject {
     // Array to hold tapped cards
     @Published var cardsTapped = [Card]()
     
+    // Game start time
+    var startTime: Date?
+    
     // Context
     var managedObjectContext = AppDelegate.sharedContext
     
-    
-    // MARK: Start Game
-    // Reset or setup new game
-    func prepareNewGame() {
-        // Reset game values
-        currentGame = nil
-        matchCount = 0
-        moves = 0
-        cardsTapped.removeAll()
-        // Create new playthrough
-        currentGame = Playthrough(cards: assignValues(cardCount: 30))
-        // Toggle play button
-        playButtonIsActive.toggle()
-    }
-    
+    // Audio player
+    var audioPlayer: AVAudioPlayer?
+
+    // MARK: Start game
     // Function to start new game
     func startGame() {
         //guard let game = currentGame else { return }
         // Toggle play button
         playButtonIsActive.toggle()
         // 5 second preview of card values
-       // previewAll(cards: game.cards)
-        currentGame?.startTime = .now
+        // previewAll(cards: game.cards)
+        startTime = .now
         
         playAudio(sound: "countDownSound", type: ".mp3")
         //        if game.startTime != nil {
@@ -66,59 +58,7 @@ final class GameViewModel: ObservableObject {
         //        }
     }
     
-    //Function to assign random values to game cards
-    func assignValues(cardCount: Int) -> [Card] {
-        // Array for card value string names
-        var stringValues: [String] = []
-        // Get array on ints for card values
-        var ints = createIntArray(withCountOf: cardCount/2)
-        // Add duplicate values to array
-        ints.append(contentsOf: ints)
-        // Shuffle values
-        let shuffledValues = ints.shuffled()
-        // Add to string values formatted to match asset title
-        for i in 0..<shuffledValues.count {
-            stringValues.append("cardFace\(shuffledValues[i])")
-        }
-        // Retrun array as cards with string values
-        return cards(from: stringValues)
-    }
-    
-    // Return random ints array of specified length
-    func createIntArray(withCountOf count: Int) -> [Int] {
-        // Arrays to hold random Int
-        var intArray = [Int]()
-        // Random Int value
-        var randomInt = Int()
-        // Var for duplicate check
-        var matchingInts = [Int]()
-        
-        while intArray.count < count {
-            // Get random int value
-            randomInt = Int.random(in: 1...143)
-            // Filter for matches to randomInt in array of Ints
-            matchingInts = intArray.filter({ (int) -> Bool in
-                return int == randomInt
-            })
-            if matchingInts.count == 0 {
-                // Assign random int to array
-                intArray.append(randomInt)
-            }
-        }
-        return intArray
-    }
-    
-    // Convert array of strings to array of Cards
-    func cards(from strings: [String]) -> [Card]{
-        var cards: [Card] = []
-        for i in 0..<strings.count {
-            cards.append(Card(imageString: strings[i]))
-        }
-        return cards
-    }
-    
     // MARK: Game Play
-    
     // Function to show all cards
     func previewAll(cards: [Card]) {
         for i in 0..<cards.count {
@@ -129,12 +69,11 @@ final class GameViewModel: ObservableObject {
         DispatchQueue.main.asyncAfter(deadline: .now() + 5, execute: { [self] in
             for i in 0..<cards.count {
                 // Hide card value
-                currentGame!.cards[i].faceUp.toggle()
+                currentDeck.cards[i].faceUp.toggle()
                 print("Card \(i) is faceUp: \(cards[i].faceUp)")
             }
             // Initialize game start time
-            guard currentGame != nil else { return }
-            currentGame!.startTime = Date.now
+            startTime = Date.now
         })
     }
     
@@ -176,24 +115,21 @@ final class GameViewModel: ObservableObject {
         componentFormatter.unitsStyle = .positional
         componentFormatter.zeroFormattingBehavior = .pad
         // Set current time label with formatted elapsed time
-        guard let game = currentGame else { return }
-        currentElapsedTimeLabel = componentFormatter.string(from: game.startTime?.timeIntervalSinceNow ?? 0) ?? "0"
+        currentElapsedTimeLabel = componentFormatter.string(from: startTime?.timeIntervalSinceNow ?? 0) ?? "0"
     }
     
     
     // MARK: End Game
     // Function to end game
     func endGame() {
-        guard let game = currentGame,
-              let startTime = game.startTime,
-              matchCount == 15 else { return }
+        guard let time = startTime, matchCount == 15 else { return }
         print("Match count: \(matchCount)")
         // Finalize game values and add new score to core data
         let newScore = NSEntityDescription.insertNewObject(forEntityName: "Score", into: self.managedObjectContext) as! Score
         newScore.totalMoves = Int16(moves)
-        newScore.timeStarted = startTime
+        newScore.timeStarted = time
         newScore.playerName = UserDefaults.standard.string(forKey: "name")
-        newScore.elapsedTime = game.startTime!.timeIntervalSinceNow
+        newScore.elapsedTime = time.timeIntervalSinceNow
         
         // Add score to game center leaderboard
         // Pass elapsed time multipled by 100 to format for positive value in miliseconds
@@ -211,11 +147,16 @@ final class GameViewModel: ObservableObject {
             print("Error saving score in endGame function.")
         }
         // Reset values
-        moves = 0
-        matchCount = 0
-        prepareNewGame()
+        resetGame()
         // TODO: Reload table view
         
+    }
+    
+    func resetGame() {
+        moves = 0
+        matchCount = 0
+        cardsTapped.removeAll()
+        currentDeck = DeckViewModel().prepareNewDeck(withCardCount: 30)
     }
     
     func formatTime(date: Date) -> String {
@@ -223,5 +164,23 @@ final class GameViewModel: ObservableObject {
         timeFormatter.dateFormat = "hh:mm:ss"
         let formattedTime = timeFormatter.string(from: date)
         return formattedTime
+    }
+    
+    // MARK: Audio Player
+    // Function to play sound from parameters entered
+    func playAudio(sound: String, type: String) {
+        // get path to sound
+        if let path = Bundle.main.path(forResource: sound, ofType: type) {
+            // Use do-try to get sound from path
+            do {
+                audioPlayer = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: path))
+                // Play sound
+                audioPlayer?.play()
+            }
+            catch {
+                // Print error if unsuccessful
+                print("Error: Sound file not found. Check path.")
+            }
+        }
     }
 }

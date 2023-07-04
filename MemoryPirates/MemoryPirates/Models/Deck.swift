@@ -5,7 +5,7 @@
  */
 
 //
-//  Playthrough.swift
+//  Deck.swift
 //  GameOfMemory
 //
 //  Created by Nigel Krajewski on 12/4/20.
@@ -15,12 +15,12 @@ import Foundation
 import UIKit
 import CoreData
 
-
-class Playthrough {
+class Deck: Identifiable {
     
     //MARK: Properties
+    var id = UUID()
     var cards: [Card] = []
-    var startTime: Date?
+    //var startTime: Date?
     
     // MARK: Initializer
     init(cards: [Card]) {

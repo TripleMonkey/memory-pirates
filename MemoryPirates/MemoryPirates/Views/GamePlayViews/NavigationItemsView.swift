@@ -16,7 +16,7 @@ struct NavigationItemsView: View {
                 Spacer()
                 // Reset button
                 Button("reset") {
-                    gameVM.prepareNewGame()
+                    gameVM.resetGame()
                 }
                 .opacity(gameVM.playButtonIsActive ? 0.0 : 1.0)
                 .offset(y: 3)
