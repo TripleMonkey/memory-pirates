@@ -60,15 +60,15 @@ final class GameViewModel: ObservableObject {
     // MARK: Game Play
     // Function to show all cards
     func previewAll(cards: [Card]) {
+        // Show card value
         for i in 0..<cards.count {
-            // Show card value
             cards[i].faceUp = true
             print("Card \(i) is faceUp: \(cards[i].faceUp)")
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 5, execute: { [self] in
+            // Hide card value
             for i in 0..<cards.count {
-                // Hide card value
-                currentDeck.cards[i].faceUp.toggle()
+                currentDeck.cards[i].faceUp = false
             }
             // Initialize game start time
             startTime = Date.now
@@ -77,7 +77,7 @@ final class GameViewModel: ObservableObject {
     
     // Func to record card taps
     func handleCardTap(tappedCard: Card) {
-        guard !playButtonIsActive else { return }
+        guard cardsTapped.count < 2, !playButtonIsActive else { return }
         // Add card to list
         if cardsTapped.count < 2 {
             cardsTapped.append(tappedCard)
@@ -87,21 +87,23 @@ final class GameViewModel: ObservableObject {
         compareCards()
     }
     
-    @objc func compareCards() {
+    private func compareCards() {
         guard cardsTapped.count == 2 else { return }
-        if cardsTapped[0].value == cardsTapped[1].value {
-            audioPlayer.playAudio(sound: "matchSound", type: ".mp3")
-            self.matchCount += 1
-            cardsTapped[0].matched = true
-            cardsTapped[1].matched = true
-            self.endGame()
-        } else {
-            audioPlayer.playAudio(sound: "noMatchSound", type: ".mp3")
-            cardsTapped[0].faceUp = false
-            cardsTapped[1].faceUp = false
-        }
-        // Clear list
-        cardsTapped.removeAll()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.6, execute: { [self] in
+            if cardsTapped[0].value == cardsTapped[1].value {
+                audioPlayer.playAudio(sound: "matchSound", type: ".mp3")
+                self.matchCount += 1
+                cardsTapped[0].matched = true
+                cardsTapped[1].matched = true
+                self.endGame()
+            } else {
+                audioPlayer.playAudio(sound: "noMatchSound", type: ".mp3")
+                cardsTapped[0].faceUp = false
+                cardsTapped[1].faceUp = false
+            }
+            // Clear list
+            cardsTapped.removeAll()
+        })
     }
     
     // Function to diplay elapsed time
