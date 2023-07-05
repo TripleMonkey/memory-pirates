@@ -8,7 +8,7 @@
 import Foundation
 class DeckViewModel {
     
-    // MARK: Create Game
+    // MARK: Create Game Deck
     // Reset or setup new game
     func prepareNewDeck(withCardCount deckSize: Int) -> Deck {
         // Create new deck of cards

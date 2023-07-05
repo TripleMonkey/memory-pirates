@@ -9,8 +9,10 @@ import SwiftUI
 
 struct AudioOptionsView: View {
     
-    @State var muted = false
-    @State var volume = 0.5
+
+    @State var avPlayer = AVPlayerModel()
+    @AppStorage("volume") private var volume = 0.5
+    @AppStorage("muted") private var muted = false
     
     var body: some View {
         VStack{

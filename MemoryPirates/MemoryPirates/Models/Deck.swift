@@ -20,7 +20,6 @@ class Deck: Identifiable {
     //MARK: Properties
     var id = UUID()
     var cards: [Card] = []
-    //var startTime: Date?
     
     // MARK: Initializer
     init(cards: [Card]) {

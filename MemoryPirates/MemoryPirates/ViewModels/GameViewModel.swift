@@ -26,7 +26,7 @@ final class GameViewModel: ObservableObject {
     // Count game moves
     @Published var moves: Int = 0
     // Bool for play button visibility
-    @Published var playButtonIsActive: Bool = false
+    @Published var playButtonIsActive: Bool = true
     // String to hold current game elapsed time
     @Published var currentElapsedTimeLabel = "0"
     // Array to hold tapped cards
@@ -39,23 +39,22 @@ final class GameViewModel: ObservableObject {
     var managedObjectContext = AppDelegate.sharedContext
     
     // Audio player
-    var audioPlayer: AVAudioPlayer?
-
+    var audioPlayer = AVPlayerModel()
+    
     // MARK: Start game
     // Function to start new game
     func startGame() {
-        //guard let game = currentGame else { return }
         // Toggle play button
         playButtonIsActive.toggle()
         // 5 second preview of card values
-        // previewAll(cards: game.cards)
+        previewAll(cards: currentDeck.cards)
         startTime = .now
         
-        playAudio(sound: "countDownSound", type: ".mp3")
-        //        if game.startTime != nil {
-        //            // Start elapsed time counter
-        //            self.elapsedTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(updateElapsedTime), userInfo: nil, repeats: true)
-        //        }
+        audioPlayer.playAudio(sound: "countDownSound", type: ".mp3")
+        if startTime != nil {
+            // Start elapsed time counter
+            self.elapsedTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(updateElapsedTime), userInfo: nil, repeats: true)
+        }
     }
     
     // MARK: Game Play
@@ -92,13 +91,13 @@ final class GameViewModel: ObservableObject {
     @objc func compareCards() {
         guard cardsTapped.count == 2 else { return }
         if cardsTapped[0].value == cardsTapped[1].value {
-            playAudio(sound: "matchSound", type: ".mp3")
+            audioPlayer.playAudio(sound: "matchSound", type: ".mp3")
             self.matchCount += 1
             cardsTapped[0].matched = true
             cardsTapped[1].matched = true
             self.endGame()
         } else {
-            playAudio(sound: "noMatchSound", type: ".mp3")
+            audioPlayer.playAudio(sound: "noMatchSound", type: ".mp3")
             cardsTapped[0].faceUp = false
             cardsTapped[1].faceUp = false
         }
@@ -138,7 +137,7 @@ final class GameViewModel: ObservableObject {
         // Stop timer
         elapsedTimer?.invalidate()
         // End game animation and audio
-        playAudio(sound: "completeSound", type: ".mp3")
+        audioPlayer.playAudio(sound: "completeSound", type: ".mp3")
         // Save to CoreData
         do {
             try managedObjectContext.save()
@@ -157,6 +156,7 @@ final class GameViewModel: ObservableObject {
         matchCount = 0
         cardsTapped.removeAll()
         currentDeck = DeckViewModel().prepareNewDeck(withCardCount: 30)
+        playButtonIsActive = true
     }
     
     func formatTime(date: Date) -> String {
@@ -164,23 +164,5 @@ final class GameViewModel: ObservableObject {
         timeFormatter.dateFormat = "hh:mm:ss"
         let formattedTime = timeFormatter.string(from: date)
         return formattedTime
-    }
-    
-    // MARK: Audio Player
-    // Function to play sound from parameters entered
-    func playAudio(sound: String, type: String) {
-        // get path to sound
-        if let path = Bundle.main.path(forResource: sound, ofType: type) {
-            // Use do-try to get sound from path
-            do {
-                audioPlayer = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: path))
-                // Play sound
-                audioPlayer?.play()
-            }
-            catch {
-                // Print error if unsuccessful
-                print("Error: Sound file not found. Check path.")
-            }
-        }
     }
 }
