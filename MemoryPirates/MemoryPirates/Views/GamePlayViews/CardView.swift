@@ -13,12 +13,12 @@ struct CardView: View {
     
     @State var card: Card
     
-    
     var body: some View {
         if card.matched {
             Image("matchedImage")
                 .resizable()
                 .scaledToFit()
+                .opacity(0.7)
         } else if card.faceUp {
             Image(card.value)
                 .resizable()
@@ -36,9 +36,3 @@ struct CardView: View {
         }
     }
 }
-
-//struct CardView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        CardView(card: Card(imageString: "cardFace134"))
-//    }
-//}

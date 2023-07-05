@@ -56,7 +56,7 @@ final class GameViewModel: ObservableObject {
         DispatchQueue.main.asyncAfter(deadline: .now() + 5, execute: { [self] in
             startTime = .now
             // Start elapsed time counter
-            elapsedTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(updateElapsedTime), userInfo: nil, repeats: true)
+            elapsedTimer = Timer.scheduledTimer(timeInterval: 0.09, target: self, selector: #selector(updateElapsedTime), userInfo: nil, repeats: true)
         })
     }
     
@@ -111,6 +111,8 @@ final class GameViewModel: ObservableObject {
         if startTime == nil {
             elapsedTimer?.invalidate()
         }
+        
+        currentElapsedTimeLabel = LeaderboardViewModel.shared.formattedTime(seconds: startTime?.timeIntervalSinceNow ?? 0)
         // Create formatter to convert double to formatted string
         let componentFormatter = DateComponentsFormatter()
         componentFormatter.includesApproximationPhrase = false
@@ -118,7 +120,7 @@ final class GameViewModel: ObservableObject {
         componentFormatter.unitsStyle = .positional
         componentFormatter.zeroFormattingBehavior = .pad
         // Set current time label with formatted elapsed time
-        currentElapsedTimeLabel = componentFormatter.string(from: startTime?.timeIntervalSinceNow ?? 0) ?? "0"
+      //  currentElapsedTimeLabel = componentFormatter.string(from: startTime?.timeIntervalSinceNow ?? 0) ?? "0"
             
     }
     

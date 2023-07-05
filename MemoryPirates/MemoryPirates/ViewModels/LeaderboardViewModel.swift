@@ -43,7 +43,7 @@ final class LeaderboardViewModel: ObservableObject {
         if minSecMil.0 > 0 {
             timeString = "\(min):\(sec).\(mil)"
         } else {
-            timeString = "\(sec).\(mil)"
+            timeString = "00:\(sec).\(mil)"
         }
         return timeString
     }
@@ -58,11 +58,15 @@ final class LeaderboardViewModel: ObservableObject {
     
     // MARK: Sorting funtion
     func sortGameHistory(scores: [Score], by sortBy: SortValue) -> [Score] {
-        // Get best time
+        // Sort by best time
         let bestTimes = scores.sorted {
             $0.elapsedTime > $1.elapsedTime
         }
-        bestTime = formattedTime(seconds: bestTimes[0].elapsedTime)
+        // Make sure array not empty
+        if !bestTimes.isEmpty {
+            // Update bestTime param
+            bestTime = formattedTime(seconds: bestTimes[0].elapsedTime)
+        }
         var sortedScores: [Score] = []
         switch sortBy {
         case .bestTime:
