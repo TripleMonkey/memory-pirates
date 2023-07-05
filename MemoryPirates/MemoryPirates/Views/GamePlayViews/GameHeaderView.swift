@@ -9,6 +9,9 @@ import SwiftUI
 
 struct GameHeaderView: View {
     
+    @StateObject var gameVM = GameViewModel.shared
+    @StateObject var leaderboardVM = LeaderboardViewModel.shared
+    
     var body: some View {
         ZStack {
             Rectangle()
@@ -23,9 +26,9 @@ struct GameHeaderView: View {
                 .padding()
                 Spacer()
                 VStack(alignment: .trailing) {
-                    Text("00:00.00")
+                    Text(gameVM.currentElapsedTimeLabel)
                         .padding(.bottom)
-                    Text("00:53.36")
+                    Text(leaderboardVM.bestTime)
                 }
                 .padding()
                 Spacer()

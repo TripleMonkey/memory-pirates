@@ -15,6 +15,7 @@ final class LeaderboardViewModel: ObservableObject {
     
     // MARK: Published variables
     @Published var gameHistory: [Score] = []
+    @Published var bestTime: String = "00:00.00"
     @Published var sortSelector: SortValue = .bestTime
     
     // Singleton pattern to maintain single source of truth
@@ -57,12 +58,15 @@ final class LeaderboardViewModel: ObservableObject {
     
     // MARK: Sorting funtion
     func sortGameHistory(scores: [Score], by sortBy: SortValue) -> [Score] {
+        // Get best time
+        let bestTimes = scores.sorted {
+            $0.elapsedTime > $1.elapsedTime
+        }
+        bestTime = formattedTime(seconds: bestTimes[0].elapsedTime)
         var sortedScores: [Score] = []
         switch sortBy {
         case .bestTime:
-            sortedScores = scores.sorted {
-                $0.elapsedTime > $1.elapsedTime
-            }
+            sortedScores = bestTimes
         case .fewestMoves:
             sortedScores = scores.sorted {
                 var isNext = $0.totalMoves < $1.totalMoves
@@ -104,6 +108,7 @@ final class LeaderboardViewModel: ObservableObject {
             do {
                 let history = try context.fetch(request)
                 gameHistory = sortGameHistory(scores: history, by: sortSelector)
+                
                 print("FETCH SUCCESS: Games Played= \(gameHistory.count)")
             } catch let error {
                 print("ERROR FETCHING: \(error)")

@@ -28,7 +28,7 @@ final class GameViewModel: ObservableObject {
     // Bool for play button visibility
     @Published var playButtonIsActive: Bool = true
     // String to hold current game elapsed time
-    @Published var currentElapsedTimeLabel = "0"
+    @Published var currentElapsedTimeLabel = "00:00.00"
     // Array to hold tapped cards
     @Published var cardsTapped = [Card]()
     
@@ -44,17 +44,20 @@ final class GameViewModel: ObservableObject {
     // MARK: Start game
     // Function to start new game
     func startGame() {
+        // Reset game values
+        moves = 0
+        matchCount = 0
         // Toggle play button
         playButtonIsActive.toggle()
         // 5 second preview of card values
         previewAll(cards: currentDeck.cards)
-        startTime = .now
-        
         audioPlayer.playAudio(sound: "countDownSound", type: ".mp3")
-        if startTime != nil {
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5, execute: { [self] in
+            startTime = .now
             // Start elapsed time counter
-            self.elapsedTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(updateElapsedTime), userInfo: nil, repeats: true)
-        }
+            elapsedTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(updateElapsedTime), userInfo: nil, repeats: true)
+        })
     }
     
     // MARK: Game Play
@@ -63,15 +66,12 @@ final class GameViewModel: ObservableObject {
         // Show card value
         for i in 0..<cards.count {
             cards[i].faceUp = true
-            print("Card \(i) is faceUp: \(cards[i].faceUp)")
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 5, execute: { [self] in
             // Hide card value
             for i in 0..<cards.count {
                 currentDeck.cards[i].faceUp = false
             }
-            // Initialize game start time
-            startTime = Date.now
         })
     }
     
@@ -108,6 +108,9 @@ final class GameViewModel: ObservableObject {
     
     // Function to diplay elapsed time
     @objc func updateElapsedTime() {
+        if startTime == nil {
+            elapsedTimer?.invalidate()
+        }
         // Create formatter to convert double to formatted string
         let componentFormatter = DateComponentsFormatter()
         componentFormatter.includesApproximationPhrase = false
@@ -116,6 +119,7 @@ final class GameViewModel: ObservableObject {
         componentFormatter.zeroFormattingBehavior = .pad
         // Set current time label with formatted elapsed time
         currentElapsedTimeLabel = componentFormatter.string(from: startTime?.timeIntervalSinceNow ?? 0) ?? "0"
+            
     }
     
     
@@ -123,6 +127,7 @@ final class GameViewModel: ObservableObject {
     // Function to end game
     func endGame() {
         guard let time = startTime, matchCount == 15 else { return }
+        
         // Finalize game values and add new score to core data
         let newScore = NSEntityDescription.insertNewObject(forEntityName: "Score", into: self.managedObjectContext) as! Score
         newScore.totalMoves = Int16(moves)
@@ -134,8 +139,6 @@ final class GameViewModel: ObservableObject {
         // Pass elapsed time multipled by 100 to format for positive value in miliseconds
         GameCenterManager().reportScore(chests: moves, timeInMilliseconds: Int(newScore.elapsedTime*100))
         
-        // Stop timer
-        elapsedTimer?.invalidate()
         // End game animation and audio
         audioPlayer.playAudio(sound: "completeSound", type: ".mp3")
         // Save to CoreData
@@ -150,8 +153,8 @@ final class GameViewModel: ObservableObject {
     }
     
     func resetGame() {
-        moves = 0
-        matchCount = 0
+        // Stop game timer
+        startTime = nil
         cardsTapped.removeAll()
         currentDeck = DeckViewModel().prepareNewDeck(withCardCount: 30)
         playButtonIsActive = true
