@@ -69,7 +69,6 @@ final class GameViewModel: ObservableObject {
             for i in 0..<cards.count {
                 // Hide card value
                 currentDeck.cards[i].faceUp.toggle()
-                print("Card \(i) is faceUp: \(cards[i].faceUp)")
             }
             // Initialize game start time
             startTime = Date.now
@@ -122,7 +121,6 @@ final class GameViewModel: ObservableObject {
     // Function to end game
     func endGame() {
         guard let time = startTime, matchCount == 15 else { return }
-        print("Match count: \(matchCount)")
         // Finalize game values and add new score to core data
         let newScore = NSEntityDescription.insertNewObject(forEntityName: "Score", into: self.managedObjectContext) as! Score
         newScore.totalMoves = Int16(moves)
@@ -132,7 +130,7 @@ final class GameViewModel: ObservableObject {
         
         // Add score to game center leaderboard
         // Pass elapsed time multipled by 100 to format for positive value in miliseconds
-        GameCenterManager().reportScore(chests: moves, timeInMilliseconds: Int(newScore.elapsedTime*(100)))
+        GameCenterManager().reportScore(chests: moves, timeInMilliseconds: Int(newScore.elapsedTime*100))
         
         // Stop timer
         elapsedTimer?.invalidate()
@@ -147,8 +145,6 @@ final class GameViewModel: ObservableObject {
         }
         // Reset values
         resetGame()
-        // TODO: Reload table view
-        
     }
     
     func resetGame() {

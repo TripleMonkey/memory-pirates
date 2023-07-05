@@ -17,6 +17,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        // Set initial volume value for UserDefaults
+        UserDefaults.standard.register(defaults: ["volume" : 1.0])
+        
         return true
     }
 
