@@ -10,11 +10,7 @@ import SwiftUI
 struct GameAreaGridView: View {
     
     @StateObject private var gameVM = GameViewModel.shared
-    
-//    var openingCards: Deck {
-//        Deck(cards: DeckViewModel().assignValues(cardCount: 30))
-//    }
-    
+
     let columns: [GridItem] = [
         GridItem(.flexible(minimum: 70, maximum: 100), spacing: 1.0, alignment: .leading),
         GridItem(.flexible(minimum: 70, maximum: 100), spacing: 1.0, alignment: .leading),

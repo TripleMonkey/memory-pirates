@@ -12,23 +12,27 @@ struct NavigationItemsView: View {
     @StateObject private var gameVM = GameViewModel.shared
     
     var body: some View {
-            HStack{
-                Spacer()
-                // Reset button
-                Button("reset") {
-                    gameVM.resetGame()
-                }
-                .opacity(gameVM.playButtonIsActive ? 0.0 : 1.0)
-                .offset(y: 3)
-                // Profile link
-                NavigationLink(destination: ProfileView()
-                    .navigationTitle("Profile")
-                    .navigationBarTitleDisplayMode(.inline)) {
-                        Label("Profile", systemImage: "person.fill")
-                            .labelStyle(.iconOnly)
-                    }
-            }
+        HStack{
             Spacer()
+            // Reset button
+            Button("reset") {
+                gameVM.resetGame()
+            }
+            .opacity(gameVM.playButtonIsActive ? 0.0 : 1.0)
+            .offset(y: 3)
+            // Profile link
+            NavigationLink(destination: ProfileView()
+                .navigationTitle("Profile")
+                .navigationBarTitleDisplayMode(.inline))
+            {
+                Label("Profile", systemImage: "person.fill")
+                    .labelStyle(.iconOnly)
+            }
+        }
+        .onAppear() {
+            GameCenterManager().accessPoint.isActive = true
+        }
+        Spacer()
     }
 }
 

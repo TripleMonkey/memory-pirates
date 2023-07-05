@@ -16,6 +16,7 @@ final class GameViewModel: ObservableObject {
     static let shared = GameViewModel()
     private init() {
         currentDeck = DeckViewModel().prepareNewDeck(withCardCount: 30)
+        GameCenterManager().accessPoint.isActive = false
     }
     
     @Published var currentDeck: Deck
@@ -31,6 +32,8 @@ final class GameViewModel: ObservableObject {
     @Published var currentElapsedTimeLabel = "00:00.00"
     // Array to hold tapped cards
     @Published var cardsTapped = [Card]()
+    // Bool for profile view
+    @Published var profileVisible = false
     
     // Game start time
     var startTime: Date?

@@ -9,7 +9,9 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State private var showingOptions: Bool = false
+    init() {
+        GameCenterManager().authenticatePlayer()
+    }
     
     var body: some View {
         NavigationStack {
