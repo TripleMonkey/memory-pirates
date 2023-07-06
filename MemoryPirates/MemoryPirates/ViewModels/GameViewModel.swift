@@ -17,6 +17,7 @@ final class GameViewModel: ObservableObject {
     private init() {
         currentDeck = DeckViewModel().prepareNewDeck(withCardCount: 30)
         GameCenterManager().accessPoint.isActive = false
+        audioPlayer.playAudio(sound: "launchSound", type: ".mp3")
     }
     
     @Published var currentDeck: Deck
@@ -32,8 +33,6 @@ final class GameViewModel: ObservableObject {
     @Published var currentElapsedTimeLabel = "00:00.00"
     // Array to hold tapped cards
     @Published var cardsTapped = [Card]()
-    // Bool for profile view
-    @Published var profileVisible = false
     
     // Game start time
     var startTime: Date?
@@ -45,7 +44,6 @@ final class GameViewModel: ObservableObject {
     var audioPlayer = AVPlayerModel()
     
     // MARK: Start game
-    // Function to start new game
     func startGame() {
         // Reset game values
         moves = 0
@@ -92,7 +90,7 @@ final class GameViewModel: ObservableObject {
     
     private func compareCards() {
         guard cardsTapped.count == 2 else { return }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.6, execute: { [self] in
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4, execute: { [self] in
             if cardsTapped[0].value == cardsTapped[1].value {
                 audioPlayer.playAudio(sound: "matchSound", type: ".mp3")
                 self.matchCount += 1
@@ -114,23 +112,13 @@ final class GameViewModel: ObservableObject {
         if startTime == nil {
             elapsedTimer?.invalidate()
         }
-        
         currentElapsedTimeLabel = LeaderboardViewModel.shared.formattedTime(seconds: startTime?.timeIntervalSinceNow ?? 0)
-        // Create formatter to convert double to formatted string
-        let componentFormatter = DateComponentsFormatter()
-        componentFormatter.includesApproximationPhrase = false
-        componentFormatter.allowedUnits = [.hour, .minute, .second]
-        componentFormatter.unitsStyle = .positional
-        componentFormatter.zeroFormattingBehavior = .pad
-        // Set current time label with formatted elapsed time
-      //  currentElapsedTimeLabel = componentFormatter.string(from: startTime?.timeIntervalSinceNow ?? 0) ?? "0"
-            
     }
     
     
     // MARK: End Game
     // Function to end game
-    func endGame() {
+    private func endGame() {
         guard let time = startTime, matchCount == 15 else { return }
         
         // Finalize game values and add new score to core data
@@ -163,12 +151,5 @@ final class GameViewModel: ObservableObject {
         cardsTapped.removeAll()
         currentDeck = DeckViewModel().prepareNewDeck(withCardCount: 30)
         playButtonIsActive = true
-    }
-    
-    func formatTime(date: Date) -> String {
-        let timeFormatter = DateFormatter()
-        timeFormatter.dateFormat = "hh:mm:ss"
-        let formattedTime = timeFormatter.string(from: date)
-        return formattedTime
     }
 }
