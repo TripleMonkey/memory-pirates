@@ -53,11 +53,13 @@ final class GameViewModel: ObservableObject {
         // 5 second preview of card values
         previewAll(cards: currentDeck.cards)
         audioPlayer.playAudio(sound: "countDownSound", type: ".mp3")
-        
+        startTime = .now + 5
         DispatchQueue.main.asyncAfter(deadline: .now() + 5, execute: { [self] in
-            startTime = .now
-            // Start elapsed time counter
-            elapsedTimer = Timer.scheduledTimer(timeInterval: 0.09, target: self, selector: #selector(updateElapsedTime), userInfo: nil, repeats: true)
+            // Make sure game not reset before sterating timer
+            if startTime != nil {
+                // Start elapsed time counter
+                elapsedTimer = Timer.scheduledTimer(timeInterval: 0.09, target: self, selector: #selector(updateElapsedTime), userInfo: nil, repeats: true)
+            }
         })
     }
     
@@ -109,6 +111,7 @@ final class GameViewModel: ObservableObject {
     
     // Function to diplay elapsed time
     @objc func updateElapsedTime() {
+        // If game time is nil stop timer
         if startTime == nil {
             elapsedTimer?.invalidate()
         }
@@ -146,7 +149,7 @@ final class GameViewModel: ObservableObject {
     }
     
     func resetGame() {
-        // Stop game timer
+        // Stop elapsed timer by setting strat time to nil
         startTime = nil
         cardsTapped.removeAll()
         currentDeck = DeckViewModel().prepareNewDeck(withCardCount: 30)
