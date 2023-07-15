@@ -17,7 +17,7 @@ final class GameViewModel: ObservableObject {
     private init() {
         currentDeck = DeckViewModel().prepareNewDeck(withCardCount: 30)
         GameCenterManager().accessPoint.isActive = false
-        audioPlayer.playAudio(sound: "launchSound", type: ".mp3")
+        avPlayer.playAudio(sound: "launchSound", type: ".mp3")
     }
     
     @Published var currentDeck: Deck
@@ -34,6 +34,8 @@ final class GameViewModel: ObservableObject {
     // Array to hold tapped cards
     @Published var cardsTapped = [Card]()
     
+    @Published var previewCards = false
+    
     // Game start time
     var startTime: Date?
     
@@ -41,7 +43,7 @@ final class GameViewModel: ObservableObject {
     var managedObjectContext = AppDelegate.sharedContext
     
     // Audio player
-    var audioPlayer = AVPlayerModel()
+    var avPlayer = AVPlayerModel()
     
     // MARK: Start game
     func startGame() {
@@ -52,7 +54,7 @@ final class GameViewModel: ObservableObject {
         playButtonIsActive.toggle()
         // 5 second preview of card values
         previewAll(cards: currentDeck.cards)
-        audioPlayer.playAudio(sound: "countDownSound", type: ".mp3")
+        avPlayer.playAudio(sound: "countDownSound", type: ".mp3")
         startTime = .now + 5
         DispatchQueue.main.asyncAfter(deadline: .now() + 5, execute: { [self] in
             // Make sure game not reset before sterating timer
@@ -69,12 +71,14 @@ final class GameViewModel: ObservableObject {
         // Show card value
         for i in 0..<cards.count {
             cards[i].faceUp = true
+            self.previewCards.toggle()
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 5, execute: { [self] in
             // Hide card value
             for i in 0..<cards.count {
                 currentDeck.cards[i].faceUp = false
             }
+            self.previewCards.toggle()
         })
     }
     
@@ -94,13 +98,13 @@ final class GameViewModel: ObservableObject {
         guard cardsTapped.count == 2 else { return }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.4, execute: { [self] in
             if cardsTapped[0].value == cardsTapped[1].value {
-                audioPlayer.playAudio(sound: "matchSound", type: ".mp3")
+                avPlayer.playAudio(sound: "matchSound", type: ".mp3")
                 self.matchCount += 1
                 cardsTapped[0].matched = true
                 cardsTapped[1].matched = true
                 self.endGame()
             } else {
-                audioPlayer.playAudio(sound: "noMatchSound", type: ".mp3")
+                avPlayer.playAudio(sound: "noMatchSound", type: ".mp3")
                 cardsTapped[0].faceUp = false
                 cardsTapped[1].faceUp = false
             }
@@ -136,7 +140,7 @@ final class GameViewModel: ObservableObject {
         GameCenterManager().reportScore(chests: moves, timeInMilliseconds: Int(newScore.elapsedTime*100))
         
         // End game animation and audio
-        audioPlayer.playAudio(sound: "completeSound", type: ".mp3")
+        avPlayer.playAudio(sound: "completeSound", type: ".mp3")
         // Save to CoreData
         do {
             try managedObjectContext.save()
@@ -154,5 +158,7 @@ final class GameViewModel: ObservableObject {
         cardsTapped.removeAll()
         currentDeck = DeckViewModel().prepareNewDeck(withCardCount: 30)
         playButtonIsActive = true
+        // Stop any audio
+        avPlayer.audioPlayer?.stop()
     }
 }

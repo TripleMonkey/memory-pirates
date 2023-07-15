@@ -166,13 +166,6 @@
 			path = Assets;
 			sourceTree = "<group>";
 		};
-		9E6E72AE2A41F11F00BB009B /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Controllers;
-			sourceTree = "<group>";
-		};
 		9EDDCBEE2A3CF4C5006E7B01 = {
 			isa = PBXGroup;
 			children = (
@@ -198,7 +191,6 @@
 				9EDDCBFC2A3CF4C5006E7B01 /* SceneDelegate.swift */,
 				9E6E72AC2A41F0EB00BB009B /* Models */,
 				9E6E72AB2A41F0D900BB009B /* Views */,
-				9E6E72AE2A41F11F00BB009B /* Controllers */,
 				9E1C35802A46A45D002C4661 /* ViewModels */,
 				9E6E72AD2A41F10800BB009B /* Assets */,
 			);

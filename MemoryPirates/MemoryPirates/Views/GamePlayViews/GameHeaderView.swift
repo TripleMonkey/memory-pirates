@@ -11,27 +11,30 @@ struct GameHeaderView: View {
     
     @StateObject var gameVM = GameViewModel.shared
     @StateObject var leaderboardVM = LeaderboardViewModel.shared
+    // Set frame to 1/2 the screen width
+    var frameWidth = UIScreen.main.bounds.width/2
     
     var body: some View {
         ZStack {
             Rectangle()
                 .foregroundColor(Color("darkBackground"))
             HStack {
-                Spacer()
                 VStack(alignment: .leading) {
                     Text("Current Time")
                         .padding(.bottom)
+                        .frame(width: frameWidth, alignment: .trailing)
                     Text("Best Time")
+                        .frame(width: frameWidth, alignment: .trailing)
                 }
                 .padding()
-                Spacer()
                 VStack(alignment: .trailing) {
                     Text(gameVM.currentElapsedTimeLabel)
                         .padding(.bottom)
+                        .frame(width: frameWidth, alignment: .leading)
                     Text(leaderboardVM.bestTime)
+                        .frame(width: frameWidth, alignment: .leading)
                 }
                 .padding()
-                Spacer()
             }
             .foregroundColor(Color("lightText"))
             .shadow(color: .black, radius: 0, x: -2, y: 2)
