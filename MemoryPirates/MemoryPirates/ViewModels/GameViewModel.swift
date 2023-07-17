@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 import CoreData
 import AVKit
+import SwiftUI
 
 final class GameViewModel: ObservableObject {
     
@@ -34,7 +35,7 @@ final class GameViewModel: ObservableObject {
     // Array to hold tapped cards
     @Published var cardsTapped = [Card]()
     
-    @Published var previewCards = false
+    var previewCards = false
     
     // Game start time
     var startTime: Date?
@@ -70,15 +71,17 @@ final class GameViewModel: ObservableObject {
     func previewAll(cards: [Card]) {
         // Show card value
         for i in 0..<cards.count {
-            cards[i].faceUp = true
-            self.previewCards.toggle()
+            withAnimation(Animation.linear(duration: 1.0)) {
+                cards[i].faceUp = true
+                self.previewCards = true
+            }
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 5, execute: { [self] in
+            self.previewCards = false
             // Hide card value
             for i in 0..<cards.count {
                 currentDeck.cards[i].faceUp = false
             }
-            self.previewCards.toggle()
         })
     }
     

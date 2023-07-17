@@ -22,6 +22,9 @@ struct ProfileView: View {
         }
         .background(Color("lightBackground"))
         .onAppear() {
+            GameCenterManager().accessPoint.isActive = true
+        }
+        .onDisappear() {
             GameCenterManager().accessPoint.isActive = false
         }
     }

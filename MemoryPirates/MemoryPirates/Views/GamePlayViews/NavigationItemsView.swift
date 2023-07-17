@@ -37,9 +37,9 @@ struct NavigationItemsView: View {
         }, message: {
             Text("Current game progess will be lost")
         })
-        .onAppear() {
-            GameCenterManager().accessPoint.isActive = true
-        }
+//        .onAppear() {
+//            GameCenterManager().accessPoint.isActive = true
+//        }
         Spacer()
     }
 }

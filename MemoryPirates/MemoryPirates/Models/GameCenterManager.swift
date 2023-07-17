@@ -30,7 +30,7 @@ class GameCenterManager: NSObject, GKGameCenterControllerDelegate {
     
     // Configure shared access point for game center
     var accessPoint: GKAccessPoint {
-        GKAccessPoint.shared.location = .topLeading
+        GKAccessPoint.shared.location = .bottomLeading
         GKAccessPoint.shared.isActive = true
         return GKAccessPoint.shared
     }
