@@ -37,6 +37,7 @@
 		9EDDCBFD2A3CF4C5006E7B01 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EDDCBFC2A3CF4C5006E7B01 /* SceneDelegate.swift */; };
 		9EDDCC052A3CF4C5006E7B01 /* MemoryPirates.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9EDDCC032A3CF4C5006E7B01 /* MemoryPirates.xcdatamodeld */; };
 		9EDDCC072A3CF4C8006E7B01 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9EDDCC062A3CF4C8006E7B01 /* Assets.xcassets */; };
+		9EEB914A2A672ED900B8FDBB /* GameWinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEB91492A672ED900B8FDBB /* GameWinView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -73,6 +74,7 @@
 		9EDDCC042A3CF4C5006E7B01 /* MemoryPirates.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MemoryPirates.xcdatamodel; sourceTree = "<group>"; };
 		9EDDCC062A3CF4C8006E7B01 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9EDDCC0B2A3CF4C8006E7B01 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9EEB91492A672ED900B8FDBB /* GameWinView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameWinView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +106,7 @@
 				9EDA4AB12A4B640300A3FA5D /* NavigationItemsView.swift */,
 				9E2C45ED2A4873F600BE1F69 /* GameHeaderView.swift */,
 				9E1C358A2A4754D7002C4661 /* GameAreaGridView.swift */,
+				9EEB91492A672ED900B8FDBB /* GameWinView.swift */,
 				9E2C45EF2A48742100BE1F69 /* GameFooterView.swift */,
 				9EDA4AAF2A4B09F400A3FA5D /* CardView.swift */,
 				9E5840F02A4D054C005B939B /* PlayButton.swift */,
@@ -287,6 +290,7 @@
 				9E1C358D2A476D37002C4661 /* ContentView.swift in Sources */,
 				9EDDCBFB2A3CF4C5006E7B01 /* AppDelegate.swift in Sources */,
 				9E6E72C82A41F3EE00BB009B /* Deck.swift in Sources */,
+				9EEB914A2A672ED900B8FDBB /* GameWinView.swift in Sources */,
 				9EDA4AB22A4B640300A3FA5D /* NavigationItemsView.swift in Sources */,
 				9EDDCBFD2A3CF4C5006E7B01 /* SceneDelegate.swift in Sources */,
 				9E2C45EE2A4873F600BE1F69 /* GameHeaderView.swift in Sources */,

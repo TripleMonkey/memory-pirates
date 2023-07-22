@@ -13,11 +13,6 @@ struct CardView: View {
     
     @State var card: Card
     
-    var scaleAnimation: Animation {
-        .easeIn(duration: 5.0)
-        .repeatCount(5)
-    }
-    
     var body: some View {
         if card.matched {
             Image("matchedImage")
@@ -28,8 +23,6 @@ struct CardView: View {
             Image(card.value)
                 .resizable()
                 .scaledToFit()
-                .scaleEffect(gameVM.previewCards ? 0.5 : 1.0, anchor: .center)
-                .animation(scaleAnimation, value: gameVM.previewCards)
         } else if !card.faceUp && !card.matched {
             Image("startingImage")
                 .resizable()

@@ -112,8 +112,6 @@ final class LeaderboardViewModel: ObservableObject {
             do {
                 let history = try context.fetch(request)
                 gameHistory = sortGameHistory(scores: history, by: sortSelector)
-                
-                print("FETCH SUCCESS: Games Played= \(gameHistory.count)")
             } catch let error {
                 print("ERROR FETCHING: \(error)")
             }
