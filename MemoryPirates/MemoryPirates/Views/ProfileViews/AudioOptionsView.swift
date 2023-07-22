@@ -9,8 +9,10 @@ import SwiftUI
 
 struct AudioOptionsView: View {
     
-    @State var muted = false
-    @State var volume = 0.5
+
+    @State var avPlayer = AVPlayerModel()
+    @AppStorage("volume") private var volume = 0.5
+    @AppStorage("muted") private var muted = false
     
     var body: some View {
         VStack{
@@ -19,7 +21,7 @@ struct AudioOptionsView: View {
                 .fontWeight(.bold)
                 .padding()
             Toggle("Mute", isOn: $muted)
-                .padding(40)
+                .padding([.leading, .trailing])
             HStack{
                 Text("Volume")
                     .padding(.trailing)
@@ -28,8 +30,9 @@ struct AudioOptionsView: View {
                 Slider(value: $volume)
                     .tint(.green)
             }
-            .padding(40)
+            .padding([.leading, .trailing])
         }
+        .padding()
         .fontWeight(.bold)
         .background(Rectangle()
             .fill(.white)
@@ -37,6 +40,7 @@ struct AudioOptionsView: View {
             .cornerRadius(10)
         )
         .foregroundColor(Color("darkBackground"))
+        .padding()
     }
 }
 

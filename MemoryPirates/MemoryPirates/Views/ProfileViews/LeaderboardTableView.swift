@@ -13,13 +13,20 @@ struct LeaderboardTableView: View {
     
     var body: some View {
         VStack {
-            HStack {
-                Spacer()
-                Text("Game History")
-                    .font(.title3)
-                    .fontWeight(.bold)
-                .padding()
-                Spacer()
+            VStack {
+                HStack {
+                    Spacer()
+                    Text("Game History")
+                        .font(.title3)
+                        .fontWeight(.bold)
+                        .padding()
+                    Spacer()
+                }
+                HStack {
+                    SortButton(sortValue: .bestTime)
+                    SortButton(sortValue: .fewestMoves)
+                    SortButton(sortValue: .newestGames)
+                }
             }
             List {
                 ForEach(gamesVM.gameHistory) { game in
@@ -37,7 +44,7 @@ struct LeaderboardTableView: View {
         .foregroundColor(Color("darkBackground"))
         .padding()
     }
-        
+    
 }
 
 struct LeaderboardTableView_Previews: PreviewProvider {

@@ -11,7 +11,7 @@ import GameKit
 
 class GameCenterManager: NSObject, GKGameCenterControllerDelegate {
     
-    let presentationController: UIViewController = ViewController()
+    let presentationController = UIViewController()
     
     // Show game center login or welcome view
     func authenticatePlayer() {
@@ -30,8 +30,8 @@ class GameCenterManager: NSObject, GKGameCenterControllerDelegate {
     
     // Configure shared access point for game center
     var accessPoint: GKAccessPoint {
-        GKAccessPoint.shared.location = .topLeading
-        GKAccessPoint.shared.isActive = true
+        GKAccessPoint.shared.location = .topTrailing
+        GKAccessPoint.shared.isActive = false
         return GKAccessPoint.shared
     }
     

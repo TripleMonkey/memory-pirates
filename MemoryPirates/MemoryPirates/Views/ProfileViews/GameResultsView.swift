@@ -9,10 +9,12 @@ import SwiftUI
 
 struct GameResultsView: View {
     
+    @StateObject var leaderboardVM = LeaderboardViewModel.shared
+    
     var gameTime: Double
     var gameMoves: Int
     var date: Date
-
+    
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
@@ -22,7 +24,7 @@ struct GameResultsView: View {
             HStack {
                 HStack {
                     Text("Time")
-                    Text("\(gameTime)")
+                    Text("\(leaderboardVM.formattedTime(seconds: gameTime))")
                 }
                 Spacer()
                 HStack {
@@ -32,12 +34,11 @@ struct GameResultsView: View {
             }
         }
         .foregroundColor(Color("darkBackground"))
-        .padding([.leading, .trailing])
     }
 }
 
 struct GameResultsView_Previews: PreviewProvider {
     static var previews: some View {
-        GameResultsView(gameTime: 30.33, gameMoves: 32, date: Date.now)
+        GameResultsView(gameTime: 533.339, gameMoves: 32, date: Date.now)
     }
 }
