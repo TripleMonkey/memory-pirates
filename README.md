@@ -1,5 +1,5 @@
 # Memory Pirates
-## Swift UIKit version of game of memory
+## Game of Memory migrated from UIKit to SwiftUI
 
 ### Requirements
 * Min deployment iOS 16.4 iPhone/iPad
