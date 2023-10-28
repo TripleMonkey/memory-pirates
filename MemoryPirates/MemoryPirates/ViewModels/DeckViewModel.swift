@@ -10,6 +10,10 @@ class DeckViewModel {
     
     // MARK: Create Game Deck
     // Reset or setup new game
+    
+    /// Prepares new deck with randomized card values
+    /// - Parameter deckSize: Number of cards to be used in game
+    /// - Returns: new Deck object with random card pair values
     func prepareNewDeck(withCardCount deckSize: Int) -> Deck {
         // Create new deck of cards
         Deck(cards: assignValues(cardCount: deckSize))

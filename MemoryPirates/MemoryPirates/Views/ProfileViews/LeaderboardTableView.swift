@@ -33,7 +33,7 @@ struct LeaderboardTableView: View {
                     GameResultsView(gameTime: game.elapsedTime, gameMoves: Int(game.totalMoves), date: game.timeStarted ?? Date.now)
                 }
             }
-            .emptyListMessage(for: gamesVM.gameHistory.count, message: "Play to see your history here!")
+            .emptyListMessage(listCount: gamesVM.gameHistory.count, message: "Play to see your history here!")
         }
         .fontWeight(.bold)
         .background(Rectangle()
@@ -44,7 +44,6 @@ struct LeaderboardTableView: View {
         .foregroundColor(Color("darkBackground"))
         .padding()
     }
-    
 }
 
 struct LeaderboardTableView_Previews: PreviewProvider {
