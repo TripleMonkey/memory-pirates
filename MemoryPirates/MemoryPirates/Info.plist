@@ -26,8 +26,6 @@
 		<string>remote-notification</string>
 	</array>
 	<key>UISupportedExternalAccessoryProtocols</key>
-	<array>
-		<string></string>
-	</array>
+	<array/>
 </dict>
 </plist>
