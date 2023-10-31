@@ -12,7 +12,7 @@ struct GameHeaderView: View {
     @StateObject var gameVM = GameViewModel.shared
     @StateObject var leaderboardVM = LeaderboardViewModel.shared
     // Set frame to 1/2 the screen width
-    var frameWidth = UIScreen.main.bounds.width/2
+    var halfWidth = UIScreen.main.bounds.width/2
     
     var body: some View {
         ZStack {
@@ -22,17 +22,25 @@ struct GameHeaderView: View {
                 VStack(alignment: .leading) {
                     Text("Current Time")
                         .padding(.bottom)
-                        .frame(width: frameWidth, alignment: .trailing)
+                        .frame(width: halfWidth, alignment: .trailing)
                     Text("Best Time")
-                        .frame(width: frameWidth, alignment: .trailing)
+                        .frame(width: halfWidth, alignment: .trailing)
+                    /*
+                     Text views are placed in half width frames to 
+                     prevent views from shifting while timer runs
+                     */
                 }
                 .padding()
                 VStack(alignment: .trailing) {
                     Text(gameVM.currentElapsedTimeLabel)
                         .padding(.bottom)
-                        .frame(width: frameWidth, alignment: .leading)
+                        .frame(width: halfWidth, alignment: .leading)
                     Text(leaderboardVM.bestTime)
-                        .frame(width: frameWidth, alignment: .leading)
+                        .frame(width: halfWidth, alignment: .leading)
+                    /*
+                     Text views are placed in half width frames to 
+                     prevent views from shifting while timer runs
+                     */
                 }
                 .padding()
             }

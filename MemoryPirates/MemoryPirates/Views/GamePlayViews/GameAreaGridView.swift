@@ -40,7 +40,7 @@ struct GameAreaGridView: View {
                 }
             })
             .padding()
-            .frame(minHeight: UIScreen.main.bounds.height*0.6)
+            //.frame(minHeight: UIScreen.main.bounds.height*0.6)
             .background(Image("foggyWater")
                 .resizable()
                 .scaledToFill())
