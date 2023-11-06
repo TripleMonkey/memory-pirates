@@ -47,7 +47,7 @@ class GameCenterManager: NSObject, GKGameCenterControllerDelegate {
     // Add score to leaderboard
     func reportScore(chests: Int, timeInMilliseconds: Int) {
         // Add score to fewestChest leaderboard
-        GKLeaderboard.submitScore(chests, context: 0, player: GKLocalPlayer.local, leaderboardIDs: ["com.triplemonkeystudio.MemeryPirates.FewestMoves"]) { error in
+        GKLeaderboard.submitScore(chests, context: 0, player: GKLocalPlayer.local, leaderboardIDs: ["triplemonkeystudio.memorypiratesfastestdigs"]) { error in
             guard let err = error else {
                 print("New score saved")
                 return
@@ -55,7 +55,7 @@ class GameCenterManager: NSObject, GKGameCenterControllerDelegate {
             print("Error reporting score: \(err).")
         }
         // Add time to bestTime leaderboard
-        GKLeaderboard.submitScore(timeInMilliseconds, context: 0, player: GKLocalPlayer.local, leaderboardIDs: ["com.triplemonkeystudio.MemoryPirates.FastestPlunder"]) { error in
+        GKLeaderboard.submitScore(-timeInMilliseconds, context: 0, player: GKLocalPlayer.local, leaderboardIDs: ["triplemonkeystudio.memorypiratesfastesttimes"]) { error in
             guard let err = error else {
                 print("New time saved")
                 return

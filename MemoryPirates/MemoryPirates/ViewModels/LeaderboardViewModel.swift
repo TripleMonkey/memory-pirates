@@ -28,7 +28,7 @@ final class LeaderboardViewModel: ObservableObject {
     // Func to return formatted string
     func formattedTime(seconds: Double) -> String {
         // multiply by 1000 to catpture miliseconds in int
-        let time: Int = Int(seconds*(100))
+        let time: Int = Int(seconds*(-100))
         // Seperate int into minutes, seconds, milliseconds
         let minSecMil = (((time/100)%3600)/60,
                          ((time/100)%3600)%60,

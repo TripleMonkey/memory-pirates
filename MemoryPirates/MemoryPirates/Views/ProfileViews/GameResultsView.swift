@@ -33,7 +33,6 @@ struct GameResultsView: View {
                 }
             }
         }
-        .foregroundColor(Color("darkBackground"))
     }
 }
 
