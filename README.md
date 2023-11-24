@@ -1,14 +1,18 @@
-# Memory Pirates
-## Game of Memory migrated from UIKit to SwiftUI
 
-### Requirements
-* Min deployment iOS 16.4 iPhone/iPad
-* CoreData and CloudKit for data persistence
+# 🏴‍☠️ Memory Pirates 🏴‍☠️
 
-### Features
-#### V 1.0
-1. UIKit and Storyboard based app for iPhone and iPad.
-2. Adaptive design using Size Class trait variations.
-#### V 2.0
-1. SwiftUI based app for iPhone and iPad
-2. Game Center Integration
+Memory Pirates is memory match game for iOS featuring the SwiftUI framework, CloudKit storage, and Game Center leaderboards. 
+
+I originally created Memory Pirates as a practice in using UIKit constraints in 2020. In 2023, I returned to this project with the goal of converting from the UIKit framework to the newer SwiftUI framework. In the process I added Cloudkit and Game Center connectivity for data persistence and local and global leaderboards. 
+
+## Features
+- Game Center connectivity
+- CloudKit data storage
+- SwiftUI
+- Cross platform
+
+### Coming Soon
+- New Game board sizes
+- Head to Head multiplayer via local network
+- iPad compatibility
+- Landscape mode
