@@ -11,8 +11,6 @@ struct GameHeaderView: View {
     
     @StateObject var gameVM = GameViewModel.shared
     @StateObject var leaderboardVM = LeaderboardViewModel.shared
-    // Set frame to 1/2 the screen width
-    var halfWidth = UIScreen.main.bounds.width/2
     
     var body: some View {
         ZStack {
@@ -22,24 +20,24 @@ struct GameHeaderView: View {
                 VStack(alignment: .leading) {
                     Text("Current Time")
                         .padding(.bottom)
-                        .frame(width: halfWidth, alignment: .trailing)
+                        .frame(maxWidth: .infinity, alignment: .trailing)
                     Text("Best Time")
-                        .frame(width: halfWidth, alignment: .trailing)
+                        .frame(maxWidth: .infinity, alignment: .trailing)
                     /*
-                     Text views are placed in half width frames to 
-                     prevent views from shifting while timer runs
+                     Both columns expand equally to split the available width,
+                     preventing views from shifting while timer runs
                      */
                 }
                 .padding()
                 VStack(alignment: .trailing) {
                     Text(gameVM.currentElapsedTimeLabel)
                         .padding(.bottom)
-                        .frame(width: halfWidth, alignment: .leading)
+                        .frame(maxWidth: .infinity, alignment: .leading)
                     Text(leaderboardVM.bestTime)
-                        .frame(width: halfWidth, alignment: .leading)
+                        .frame(maxWidth: .infinity, alignment: .leading)
                     /*
-                     Text views are placed in half width frames to 
-                     prevent views from shifting while timer runs
+                     Both columns expand equally to split the available width,
+                     preventing views from shifting while timer runs
                      */
                 }
                 .padding()

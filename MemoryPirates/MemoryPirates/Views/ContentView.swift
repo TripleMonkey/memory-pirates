@@ -19,6 +19,8 @@ struct ContentView: View {
                 VStack{
                     GameHeaderView()
                     GameAreaGridView()
+                        // Let the grid claim space before the greedy header/footer backgrounds
+                        .layoutPriority(1)
                     GameFooterView()
                 }
             }
