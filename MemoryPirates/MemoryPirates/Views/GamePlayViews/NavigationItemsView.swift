@@ -19,7 +19,7 @@ struct NavigationItemsView: View {
             Button("reset") {
                 showResetAlert = true
             }
-            .opacity(gameVM.playButtonIsActive ? 0.0 : 1.0)
+            .opacity(gameVM.playButtonIsActive ? 0.3 : 1.0)
             .offset(y: 3)
             // Profile link
             NavigationLink(destination: ProfileView()
