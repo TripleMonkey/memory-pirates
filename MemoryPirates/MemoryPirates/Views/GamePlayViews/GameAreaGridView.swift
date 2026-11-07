@@ -11,7 +11,6 @@ struct GameAreaGridView: View {
     
     @StateObject private var gameVM = GameViewModel.shared
     
-    var countDownTimer = Timer.publish(every: 0.5, on: .main, in: .common).autoconnect()
     @State var count = 5
     @State var largeScale = false
     
@@ -38,13 +37,17 @@ struct GameAreaGridView: View {
             // Card images are square, so the grid as a whole is columns:rows.
             // Fitting to this ratio keeps the grid within both the available width and height.
             .aspectRatio(CGFloat(columnCount) / CGFloat(rowCount), contentMode: .fit)
-            .onReceive(countDownTimer, perform: { _ in
-                count -= 1
-                largeScale.toggle()
-                if count == 0 {
-                    count = 5
+            // Pulse the cards every half second; the task is cancelled when the view disappears
+            .task {
+                while !Task.isCancelled {
+                    try? await Task.sleep(for: .seconds(0.5))
+                    count -= 1
+                    largeScale.toggle()
+                    if count == 0 {
+                        count = 5
+                    }
                 }
-            })
+            }
             .padding()
             //.frame(minHeight: UIScreen.main.bounds.height*0.6)
             .background(Image("foggyWater")
