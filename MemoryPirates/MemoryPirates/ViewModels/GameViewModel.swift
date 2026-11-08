@@ -56,20 +56,18 @@ final class GameViewModel: ObservableObject {
         moves = 0
         matchCount = 0
         lastGameTime = 0
-        currentElapsedTimeLabel = LeaderboardViewModel.shared.formattedTime(seconds: startTime?.timeIntervalSinceNow ?? lastGameTime)
+        currentElapsedTimeLabel = LeaderboardViewModel.shared.formattedTime(seconds: 0)
         // Toggle play button
         playButtonIsActive.toggle()
         // 5 second preview of card values
         previewAll(cards: currentDeck.cards)
         avPlayer.playAudio(sound: "countDownSound", type: ".mp3")
+        // Game clock begins once the preview ends
         startTime = .now + 5
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5.1, execute: { [self] in
-            // Make sure game not reset before sterating timer
-            if startTime != nil {
-                // Start elapsed time counter
-                elapsedTimer = Timer.scheduledTimer(timeInterval: 0.09, target: self, selector: #selector(updateElapsedTime), userInfo: nil, repeats: true)
-            }
-        })
+        // Stop any timer left over from a previous game before starting a new one
+        elapsedTimer?.invalidate()
+        // Start elapsed time counter; it holds at 00:00.00 until startTime is reached
+        elapsedTimer = Timer.scheduledTimer(timeInterval: 0.09, target: self, selector: #selector(updateElapsedTime), userInfo: nil, repeats: true)
     }
     
     // MARK: Game Play
@@ -123,10 +121,13 @@ final class GameViewModel: ObservableObject {
     // Function to diplay elapsed time
     @objc func updateElapsedTime() {
         // If game time is nil stop timer
-        if startTime == nil {
+        guard let startTime else {
             elapsedTimer?.invalidate()
+            currentElapsedTimeLabel = LeaderboardViewModel.shared.formattedTime(seconds: lastGameTime)
+            return
         }
-        currentElapsedTimeLabel = LeaderboardViewModel.shared.formattedTime(seconds: startTime?.timeIntervalSinceNow ?? lastGameTime)
+        // Elapsed time is negative once startTime has passed; clamp to 0 during the card preview
+        currentElapsedTimeLabel = LeaderboardViewModel.shared.formattedTime(seconds: min(startTime.timeIntervalSinceNow, 0))
     }
     
     

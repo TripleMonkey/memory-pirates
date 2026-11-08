@@ -25,7 +25,17 @@ struct ContentView: View {
                 }
             }
             .toolbar(content: {
-                NavigationItemsView()
+                if #available(iOS 26.0, *) {
+                    // Hide the shared Liquid Glass capsule so only the buttons show
+                    ToolbarItem {
+                        NavigationItemsView()
+                    }
+                    .sharedBackgroundVisibility(.hidden)
+                } else {
+                    ToolbarItem {
+                        NavigationItemsView()
+                    }
+                }
             })
             .toolbar(.visible, for: .navigationBar, .tabBar)
             .background(Color("lightBackground"))

@@ -27,5 +27,7 @@
 	</array>
 	<key>UISupportedExternalAccessoryProtocols</key>
 	<array/>
+	<key>CFBundlelconName</key>
+	<string>AppIcon</string>
 </dict>
 </plist>
