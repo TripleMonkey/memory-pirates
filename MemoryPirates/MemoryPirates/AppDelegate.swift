@@ -7,6 +7,7 @@
 
 import UIKit
 import CoreData
+import AVFoundation
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -19,8 +20,39 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         // Set initial volume value for UserDefaults
         UserDefaults.standard.register(defaults: ["volume" : 1.0])
+        configureAudioSession()
         
         return true
+    }
+    
+    // MARK: Audio Session
+    
+    // Configure the shared audio session for game sound effects and activate it
+    // asynchronously so AVAudioPlayer doesn't activate it on the main thread.
+    private func configureAudioSession() {
+        let session = AVAudioSession.sharedInstance()
+        do {
+            // Ambient respects the silent switch and mixes with other apps' audio
+            try session.setCategory(.ambient, mode: .default)
+            if #available(iOS 27.0, *) {
+                session.activate { _, error in
+                    if let error {
+                        print("Audio session activation failed: \(error)")
+                    }
+                }
+            } else {
+                // Fall back to synchronous activation on a background queue
+                DispatchQueue.global(qos: .userInitiated).async {
+                    do {
+                        try session.setActive(true)
+                    } catch {
+                        print("Audio session activation failed: \(error)")
+                    }
+                }
+            }
+        } catch {
+            print("Audio session configuration failed: \(error)")
+        }
     }
     
     // MARK: UISceneSession Lifecycle
